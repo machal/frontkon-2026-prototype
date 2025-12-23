@@ -2,21 +2,30 @@
 import { defaultLanguage } from '@/i18n/config';
 
 const base = import.meta.env.BASE_URL || '/';
-// Construct redirect URL using BASE_URL
-const basePath = base.endsWith('/') ? base : `${base}/`;
-const redirectUrl = `${basePath}cs/`;
+const basePath = base === '/' ? '' : base.replace(/\/$/, '');
+const redirectUrl = `${basePath}/cs/`;
 ---
 
 <html lang={defaultLanguage}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content={`0; url=${redirectUrl}`} />
+    <title>Redirecting...</title>
     <link rel="canonical" href={redirectUrl} />
-    <script is:inline define:vars={{ redirectUrl }}>
-      // Fallback redirect for browsers that don't support meta refresh
-      window.location.replace(redirectUrl);
+    <script is:inline>
+      // Smart redirect that works both locally and on GitHub Pages
+      const pathname = window.location.pathname;
+      let redirectPath = '/cs/';
+      
+      // If we're in GitHub Pages subfolder, include it in redirect
+      if (pathname.startsWith('/frontkon-2026-prototype')) {
+        redirectPath = '/frontkon-2026-prototype/cs/';
+      }
+      
+      // Use replace to avoid adding to history
+      window.location.replace(redirectPath);
     </script>
+    <meta http-equiv="refresh" content="0; url=cs/" />
   </head>
   <body>
     <p>Redirecting to <a href={redirectUrl}>Czech version</a>...</p>

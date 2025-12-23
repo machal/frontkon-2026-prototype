@@ -24,6 +24,7 @@ jobs:
         uses: withastro/action@v2
         env:
           BASE_PATH: /frontkon-2026-prototype/
+          NODE_ENV: production
         with:
           path: .
           node-version: 20
