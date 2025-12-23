@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText, mapTopics } from '@/utils/content';
+import { formatStage } from '@/utils/format';
+
+const lang: Locale = 'cs';
+const { id } = Astro.params;
+const talk = frontKonData.talks.find((t) => t.id === id);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+export function getStaticPaths() {
+  return frontKonData.talks.map((talk) => ({
+    params: { id: talk.id },
+  }));
+}
+
+if (!talk) {
+  throw Astro.redirect('/cs/archiv/');
+}
+
+const speaker = frontKonData.speakers.find((s) => s.id === talk.speakerId);
+const related = frontKonData.talks.filter((t) => t.speakerId === talk.speakerId && t.id !== talk.id).slice(0, 3);
+---
+
+<BaseLayout title={getText(talk.title, lang)} lang={lang}>
+  <div class="detail-page">
+    <a class="back-link" href={pref('/cs/archiv/')}>← Zpět na archiv</a>
+    <div class="detail-header">
+      <h1>{getText(talk.title, lang)}</h1>
+      <p class="detail-speaker">
+        {speaker?.name} · <span class="detail-company">{speaker?.company}</span>
+      </p>
+      <p class="list-meta">{talk.yearId} · {formatStage(talk.stage)} · {talk.time}</p>
+    </div>
+    <div class="video-container">
+      <div class="video-placeholder">
+        <div class="video-placeholder-content">
+          <div class="play-icon">▶</div>
+          <p>Video brzy · YouTube ID {talk.youtubeId}</p>
+        </div>
+      </div>
+    </div>
+    <div class="detail-content">
+      <div class="detail-description">
+        <p>{getText(talk.description, lang)}</p>
+        <p>V druhé části se zaměříme na praktické demo a konkrétní checklist, který lze aplikovat hned po konferenci. Přidáme i tipy na nástroje a odkazy na související témata.</p>
+      </div>
+      <p class="list-tags">{mapTopics(frontKonData.topics, talk.topicIds, lang).join(', ')}</p>
+    </div>
+    {related.length > 0 && (
+      <div class="related-section">
+        <h2>Další přednášky řečníka</h2>
+        <div class="list">
+          {related.map((item) => (
+            <a class="card card-link" href={pref(`/cs/talks/${item.id}/`)}>
+              <p class="list-title">{getText(item.title, lang)}</p>
+              <p class="list-meta">{item.yearId} · {formatStage(item.stage)}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+

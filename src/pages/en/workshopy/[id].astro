@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText } from '@/utils/content';
+
+const lang: Locale = 'en';
+const { id } = Astro.params;
+const ws = frontKonData.workshops.find((w) => w.id === id);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+const speaker = ws ? frontKonData.speakers.find((s) => s.id === ws.speakerId) : undefined;
+
+export function getStaticPaths() {
+  return frontKonData.workshops.map((w) => ({ params: { id: w.id } }));
+}
+
+if (!ws) {
+  throw Astro.redirect('/en/workshopy/');
+}
+---
+
+<BaseLayout title={getText(ws.title, lang)} lang={lang}>
+  <div class="detail-page">
+    <a class="back-link" href={pref('/en/workshopy/')}>← Back to workshops</a>
+    
+    <div class="detail-header">
+      <h1>{getText(ws.title, lang)}</h1>
+      <div class="detail-workshop-meta">
+        <div class="meta-item"><strong>Date:</strong> {ws.date}</div>
+        <div class="meta-item"><strong>Time:</strong> {ws.time}</div>
+        <div class="meta-item"><strong>Duration:</strong> {ws.duration} min</div>
+        <div class="meta-item"><strong>Capacity:</strong> {ws.capacity} people</div>
+        <div class="meta-item"><strong>Price:</strong> {ws.price}</div>
+      </div>
+    </div>
+
+    {speaker && (
+      <div class="workshop-speaker-section">
+        <h2>Instructor</h2>
+        <div class="speaker-card-horizontal">
+          <div class="speaker-avatar-large">
+            <div class="avatar-placeholder-image"></div>
+          </div>
+          <div class="speaker-info">
+            <h3><a href={pref(`/en/speakers/${speaker.id}/`)}>{speaker.name}</a></h3>
+            <p class="modal-company">{speaker.company}</p>
+            <p class="modal-description">{getText(speaker.bio, lang)}</p>
+          </div>
+        </div>
+      </div>
+    )}
+
+    <div class="detail-content">
+      <h2>Workshop annotation</h2>
+      <p class="detail-description">{getText(ws.description, lang)}</p>
+
+      <h2>Who is this workshop for?</h2>
+      <p class="detail-description">{getText(ws.audience, lang)}</p>
+
+      <h2>Workshop program</h2>
+      <p class="detail-description">{getText(ws.program, lang)}</p>
+
+      <div class="workshop-cta">
+        <a class="nav-button active" href="https://www.frontkon.cz/">Buy ticket ({ws.price})</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

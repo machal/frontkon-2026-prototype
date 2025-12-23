@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { Locale } from '@/data/types';
+
+const lang: Locale = 'en';
+const team = [
+  { name: 'Lucie K.', role: 'Program', company: 'FrontKon', bio: 'Program curation and speaker relations.' },
+  { name: 'Michal S.', role: 'Production', company: 'FrontKon', bio: 'Production lead and stage management.' },
+  { name: 'Denisa V.', role: 'UX', company: 'FrontKon', bio: 'Attendee experience and web content.' },
+  { name: 'Adam P.', role: 'DevOps', company: 'FrontKon', bio: 'Build pipeline and CI/CD.' },
+  { name: 'Tereza L.', role: 'Community', company: 'FrontKon', bio: 'Partners, volunteers and community.' },
+  { name: 'Filip R.', role: 'Video', company: 'FrontKon', bio: 'Streaming, recordings and post-production.' },
+];
+---
+
+<BaseLayout title="FrontKon Team" lang={lang}>
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">Team</p>
+      <h2>Organizers</h2>
+      <p class="subtitle">People who make FrontKon happen.</p>
+    </div>
+    <div class="grid">
+      {team.map((member) => (
+        <div class="card">
+          <div class="speaker-avatar-large">
+            <div class="avatar-placeholder-image"></div>
+          </div>
+          <h3>{member.name}</h3>
+          <p class="modal-company">{member.role} · {member.company}</p>
+          <p class="modal-description">{member.bio}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import ArchiveFilters from '@/react/ArchiveFilters';
+
+const lang: Locale = 'cs';
+const base = import.meta.env.BASE_URL || '/';
+---
+
+<BaseLayout title="Přednášky v archivu" lang={lang}>
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">Archiv</p>
+      <h2>Přednášky 2020–2026</h2>
+      <p class="subtitle">Hledání, filtry podle roku a témat.</p>
+    </div>
+    <ArchiveFilters client:load talks={frontKonData.talks} speakers={frontKonData.speakers} topics={frontKonData.topics} lang={lang} base={base} />
+  </section>
+</BaseLayout>
+

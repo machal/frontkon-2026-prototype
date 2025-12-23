@@ -1,0 +1,224 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText, mapTopics } from '@/utils/content';
+
+const lang: Locale = 'en';
+const year2026 = frontKonData.years.find((y) => y.id === '2026');
+const talks2026 = frontKonData.talks.filter((t) => t.yearId === '2026');
+const workshops2026 = frontKonData.workshops.filter((w) => w.yearId === '2026');
+const topWorkshops = workshops2026.slice(0, 3);
+const speakersHighlight = frontKonData.speakers.slice(0, 8);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+const byStage = ['A', 'B', 'C'].map((stage) => ({
+  stage,
+  slots: talks2026.filter((t) => t.stage === stage),
+}));
+
+const faq = [
+  { q: 'Where is FrontKon 2026?', a: 'Prague, O2 Universum, October 3, 2026.' },
+  { q: 'Why buy tickets early?', a: 'The event sells out; early bird secures your seat and price.' },
+  { q: 'Is the event English-friendly?', a: 'Yes, more international speakers and EN-friendly content.' },
+  { q: 'Will talks be on YouTube?', a: 'Yes, all talks will be published after the event.' },
+  { q: 'Ready for GitHub Pages?', a: 'Yes, static MPA with configurable base path.' },
+];
+
+const features = [
+  { title: '3 stages, deep talks', desc: 'No basics — production-grade lessons from practitioners.' },
+  { title: '900+ attendees', desc: 'Strong community, lots of space for hallway track.' },
+  { title: 'More international speakers', desc: '2026 goes more global and English-friendly.' },
+];
+
+const socials = [
+  { label: 'YouTube', href: 'https://www.frontkon.cz/' },
+  { label: 'Instagram', href: 'https://www.frontkon.cz/' },
+  { label: 'Twitter / X', href: 'https://www.frontkon.cz/' },
+  { label: 'Facebook', href: 'https://www.frontkon.cz/' },
+  { label: 'LinkedIn', href: 'https://www.frontkon.cz/' },
+];
+
+const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', 'AI Frontiers', 'CloudNative', 'SecureWeb'];
+---
+
+<BaseLayout title="FrontKon 2026" lang={lang}>
+  <section class="hero-wireframe">
+    <div class="hero-content">
+      <p class="eyebrow">October 3, 2026 · Prague, O2 Universum</p>
+      <h2 class="hero-title">FrontKon enters its fifth year and levels up.</h2>
+      <p class="hero-tagline">900 attendees · 3 stages · deep-dive talks · more international speakers</p>
+      <p class="hero-meta">Expect 3 stages and deep-dive talks that go far beyond the basics.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">Speakers</p>
+      <h2>Featured speakers</h2>
+      <p class="subtitle">Fan favorites returning with new faces.</p>
+    </div>
+    <div class="grid">
+      {speakersHighlight.map((speaker) => (
+        <a class="card card-link" href={pref(`/en/speakers/${speaker.id}/`)}>
+          <div class="speaker-avatar-large">
+            <div class="avatar-placeholder-image"></div>
+          </div>
+          <h3>{speaker.name}</h3>
+          <p class="modal-company">{speaker.company}</p>
+          <p class="modal-description">{getText(speaker.bio, lang)}</p>
+        </a>
+      ))}
+    </div>
+    <div class="cta-row" style="margin-top:1rem;">
+      <a class="nav-button" href={pref('/en/prednasky/')}>Full program</a>
+    </div>
+  </section>
+
+  <section id="tickets" class="section">
+    <div class="section-header">
+      <p class="eyebrow">Tickets</p>
+      <h2>Early bird tickets</h2>
+      <p class="subtitle">Buy early and save. Conference sells out every year.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Early Bird</h3>
+        <p class="modal-description">Best price for those who want to secure a spot early.</p>
+        <p class="list-title">2,990 CZK</p>
+        <a class="nav-button active" href="https://www.frontkon.cz/">Buy</a>
+      </div>
+      <div class="card">
+        <h3>Standard</h3>
+        <p class="modal-description">Regular price for one-day conference admission.</p>
+        <p class="list-title">3,490 CZK</p>
+        <a class="nav-button" href="https://www.frontkon.cz/">Buy</a>
+      </div>
+      <div class="card">
+        <h3>Student</h3>
+        <p class="modal-description">Special price for students with valid ID.</p>
+        <p class="list-title">1,990 CZK</p>
+        <a class="nav-button" href="https://www.frontkon.cz/">Buy</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">What to expect</p>
+      <h2>FrontKon gets bigger in 2026</h2>
+      <p class="subtitle">More English-friendly content, community spirit stays.</p>
+    </div>
+    <div class="grid">
+      {features.map((item) => (
+        <div class="card">
+          <h3>{item.title}</h3>
+          <p class="modal-description">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="workshops" class="section">
+    <div class="section-header">
+      <p class="eyebrow">Workshops</p>
+      <h2>Hands-on labs</h2>
+      <p class="subtitle">Limited seats, small groups. Top 3 below, more on the workshops page.</p>
+    </div>
+    <div class="grid">
+      {topWorkshops.map((ws) => (
+        <a class="card card-link" href={pref(`/en/workshopy/${ws.id}/`)}>
+          <h3>{getText(ws.title, lang)}</h3>
+          <p class="modal-description">{getText(ws.description, lang)}</p>
+          <p class="list-meta">{ws.duration} min · capacity {ws.capacity} · {ws.price}</p>
+        </a>
+      ))}
+    </div>
+    <div class="cta-row" style="margin-top:1rem;">
+      <a class="nav-button" href={pref('/en/workshopy/')}>More workshops</a>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="section-header">
+      <p class="eyebrow">FAQ</p>
+      <h2>Frequently asked</h2>
+    </div>
+    <div class="accordion">
+      {faq.map((item) => (
+        <details class="accordion-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">FrontKon 2025</p>
+      <h2>Video & photos from 2025</h2>
+      <p class="subtitle">Watch recordings and gallery. Archive is always open.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="video-container">
+          <div class="video-placeholder">
+            <div class="video-placeholder-content">
+              <div class="play-icon">▶</div>
+              <p>2025 recap</p>
+            </div>
+          </div>
+        </div>
+        <a class="nav-button" href={pref('/en/archiv/')}>Go to archive</a>
+      </div>
+      <div class="card">
+        <p class="list-title">Photo gallery</p>
+        <p class="modal-description">See the vibe from last year.</p>
+        <a class="nav-button" href={pref('/en/archiv/')}>View</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">Social</p>
+      <h2>Stay in the loop</h2>
+    </div>
+    <div class="cta-row">
+      {socials.map((s) => (
+        <a class="nav-button" href={s.href}>{s.label}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">Partners 2026</p>
+      <h2>Community support</h2>
+      <p class="subtitle">Partners help us keep quality content and production.</p>
+    </div>
+    <div class="grid partners-grid">
+      {partners.map((partner) => (
+        <div class="card partner-card">
+          <p class="list-title">{partner}</p>
+          <p class="modal-description">FrontKon 2026 partner</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section newsletter-section">
+    <div class="hero-panel card">
+      <p class="eyebrow">Newsletter</p>
+      <h3>Subscribe to the newsletter and don't miss a thing!</h3>
+      <p class="modal-description">Get updates on program, speakers and news. No spam, just the essentials.</p>
+      <form class="newsletter-form" action="https://www.frontkon.cz/" method="post">
+        <input class="newsletter-input" type="email" placeholder="your@email.com" required />
+        <button class="nav-button active" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
