@@ -2,6 +2,7 @@
 import type { Locale } from '@/data/types';
 import { labels } from '@/i18n/config';
 import { toggleLangPath, withLangPrefix } from '@/i18n/routes';
+import { getTranslationObject } from '@/utils/i18n';
 import '@/styles/App.css';
 
 interface Props {
@@ -16,13 +17,16 @@ const currentPath = Astro.url?.pathname ?? '/';
 const otherLang: Locale = lang === 'cs' ? 'en' : 'cs';
 const otherLangHref = base.replace(/\/$/, '') + toggleLangPath(currentPath.replace(base, '/'), otherLang);
 
+const nav = getTranslationObject(lang, 'common', 'nav');
+const footer = getTranslationObject(lang, 'common', 'footer');
+
 const navLinks = [
-  { href: withLangPrefix('/', lang), label: 'FrontKon 2026' },
-  { href: withLangPrefix('/prednasky/', lang), label: lang === 'cs' ? 'Přednášky' : 'Talks' },
-  { href: withLangPrefix('/workshopy/', lang), label: lang === 'cs' ? 'Workshopy' : 'Workshops' },
-  { href: withLangPrefix('/blog/', lang), label: 'Blog' },
-  { href: withLangPrefix('/tym/', lang), label: lang === 'cs' ? 'Tým' : 'Team' },
-  { href: withLangPrefix('/archiv/', lang), label: lang === 'cs' ? 'Archiv' : 'Archive' },
+  { href: withLangPrefix('/', lang), label: nav.home },
+  { href: withLangPrefix('/prednasky/', lang), label: nav.talks },
+  { href: withLangPrefix('/workshopy/', lang), label: nav.workshops },
+  { href: withLangPrefix('/blog/', lang), label: nav.blog },
+  { href: withLangPrefix('/tym/', lang), label: nav.team },
+  { href: withLangPrefix('/archiv/', lang), label: nav.archive },
 ];
 ---
 
@@ -66,13 +70,13 @@ const navLinks = [
       <footer class="footer">
         <div class="footer-left">
           <p class="eyebrow">Frontendisti.cz</p>
-          <p class="footer-text">Spolek Frontendisti.cz · Jurkovičova 988/26, Praha</p>
+          <p class="footer-text">{footer.organization}</p>
         </div>
         <div class="footer-links">
           <a href="https://www.frontkon.cz/">FrontKon</a>
           <a href="https://www.frontendisti.cz/">Frontendisti.cz</a>
           <a href="https://www.frontkec.cz/">Frontkec</a>
-          <a href="https://www.frontkon.cz/">Code of Conduct</a>
+          <a href="https://www.frontkon.cz/">{footer.codeOfConduct}</a>
         </div>
       </footer>
     </div>

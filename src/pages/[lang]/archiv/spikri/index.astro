@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import SpeakerFilters from '@/react/SpeakerFilters';
+import { getTranslationObject } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+const base = import.meta.env.BASE_URL || '/';
+const t = getTranslationObject(lang, 'archive', 'speakers');
+---
+
+<BaseLayout title={t.pageTitle} lang={lang}>
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{getTranslationObject(lang, 'archive').eyebrow}</p>
+      <h2>{t.pageSubtitle}</h2>
+      <p class="subtitle">{t.pageDescription}</p>
+    </div>
+    <SpeakerFilters client:load speakers={frontKonData.speakers} talks={frontKonData.talks} lang={lang} base={base} />
+  </section>
+</BaseLayout>
+

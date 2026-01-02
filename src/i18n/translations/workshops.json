@@ -1,0 +1,41 @@
+{
+  "cs": {
+    "title": "Workshopy",
+    "subtitle": "Hands-on laby 2025–2026",
+    "description": "Vyber si praktický workshop a zjisti detaily.",
+    "backToWorkshops": "← Zpět na workshopy",
+    "date": "Termín:",
+    "time": "Čas:",
+    "duration": "Délka:",
+    "capacity": "Kapacita:",
+    "capacityLabel": "kapacita",
+    "price": "Cena:",
+    "instructor": "Lektor",
+    "annotation": "Anotace workshopu",
+    "audience": "Pro koho je workshop určen",
+    "program": "Program workshopu",
+    "buyTicket": "Koupit vstupenku",
+    "persons": "osob",
+    "min": "min"
+  },
+  "en": {
+    "title": "Workshops",
+    "subtitle": "Hands-on labs 2025–2026",
+    "description": "Pick a workshop and see the details.",
+    "backToWorkshops": "← Back to workshops",
+    "date": "Date:",
+    "time": "Time:",
+    "duration": "Duration:",
+    "capacity": "Capacity:",
+    "capacityLabel": "capacity",
+    "price": "Price:",
+    "instructor": "Instructor",
+    "annotation": "Workshop annotation",
+    "audience": "Target audience",
+    "program": "Workshop program",
+    "buyTicket": "Buy ticket",
+    "persons": "persons",
+    "min": "min"
+  }
+}
+

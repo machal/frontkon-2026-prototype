@@ -1,0 +1,17 @@
+{
+  "cs": {
+    "title": "Blog",
+    "subtitle": "Novinky z FrontKonu",
+    "description": "Krátké články od organizačního týmu.",
+    "backToBlog": "← Zpět na blog",
+    "read": "Číst"
+  },
+  "en": {
+    "title": "Blog",
+    "subtitle": "FrontKon updates",
+    "description": "Short notes from the organizing crew.",
+    "backToBlog": "← Back to blog",
+    "read": "Read"
+  }
+}
+

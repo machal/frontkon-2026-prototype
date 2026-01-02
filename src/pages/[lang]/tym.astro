@@ -1,0 +1,43 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { Locale } from '@/data/types';
+import { getTranslationObject } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+const t = getTranslationObject(lang, 'tym');
+const team = t.team || [];
+---
+
+<BaseLayout title={t.title} lang={lang}>
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h2>{t.subtitle}</h2>
+      <p class="subtitle">{t.description}</p>
+    </div>
+    <div class="grid">
+      {team.map((member: any) => (
+        <div class="card">
+          <div class="speaker-avatar-large">
+            <div class="avatar-placeholder-image"></div>
+          </div>
+          <h3>{member.name}</h3>
+          <p class="modal-company">{member.role} · {member.company}</p>
+          <p class="modal-description">{member.bio}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+

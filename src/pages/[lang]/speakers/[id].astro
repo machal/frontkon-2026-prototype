@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText, mapTopics } from '@/utils/content';
+import { formatStage } from '@/utils/format';
+import { getTranslation } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
+
+const { lang: langParam, id } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+if (!langParam || !languages.includes(langParam as Locale)) {
+  return Astro.redirect(`/${defaultLanguage}/`);
+}
+
+const speaker = frontKonData.speakers.find((s) => s.id === id);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+export function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; id: string } }> = [];
+  languages.forEach((lang) => {
+    frontKonData.speakers.forEach((speaker) => {
+      paths.push({
+        params: { lang, id: speaker.id },
+      });
+    });
+  });
+  return paths;
+}
+
+if (!speaker) {
+  throw Astro.redirect(`/${lang}/`);
+}
+
+const talks = frontKonData.talks.filter((t) => t.speakerId === speaker.id);
+const currentTalk = talks.find((t) => t.yearId === '2026');
+const pastTalks = talks.filter((t) => t.yearId !== '2026');
+---
+
+<BaseLayout title={`${speaker.name} · FrontKon`} lang={lang}>
+  <div class="detail-page">
+    <a class="back-link" href={pref(`/${lang}/archiv/`)}>{getTranslation(lang, 'speakers', 'backToArchive')}</a>
+    <div class="detail-header">
+      <h1>{speaker.name}</h1>
+      <p class="detail-company">{speaker.company}</p>
+    </div>
+    <div class="detail-content">
+      <div class="detail-description">
+        <p>{getText(speaker.bio, lang)}</p>
+        <p>{getTranslation(lang, 'speakers', 'bioDescription')}</p>
+      </div>
+      {speaker.links && (
+        <div class="links-list" style="margin: 1rem 0;">
+          {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`}>Twitter</a>}
+          {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`}>GitHub</a>}
+          {speaker.links.web && <a href={speaker.links.web}>Web</a>}
+          {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`}>LinkedIn</a>}
+        </div>
+      )}
+      {currentTalk && (
+        <div class="card">
+          <h3>{getTranslation(lang, 'speakers', 'currentTalk')}</h3>
+          <p class="list-title">{getText(currentTalk.title, lang)}</p>
+          <p class="list-meta">{currentTalk.yearId} · {formatStage(currentTalk.stage)} · {currentTalk.time}</p>
+          <p class="modal-description">{getText(currentTalk.description, lang)}</p>
+          <p class="list-tags">{mapTopics(frontKonData.topics, currentTalk.topicIds, lang).join(', ')}</p>
+        </div>
+      )}
+      {pastTalks.length > 0 && (
+        <div class="related-section">
+          <h2>{getTranslation(lang, 'speakers', 'previousTalks')}</h2>
+          <div class="list">
+            {pastTalks.map((talk) => (
+              <a class="card card-link" href={pref(`/${lang}/talks/${talk.id}/`)}>
+                <p class="list-title">{getText(talk.title, lang)}</p>
+                <p class="list-meta">{talk.yearId} · {formatStage(talk.stage)} · {talk.time}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+

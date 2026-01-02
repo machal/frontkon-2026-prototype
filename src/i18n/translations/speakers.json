@@ -1,0 +1,15 @@
+{
+  "cs": {
+    "backToArchive": "← Zpět",
+    "currentTalk": "Aktuální přednáška",
+    "previousTalks": "Minulé přednášky",
+    "bioDescription": "Přináší praktické příklady z produkčních projektů a sdílí nástroje, které používá v týmu."
+  },
+  "en": {
+    "backToArchive": "← Back",
+    "currentTalk": "Current talk",
+    "previousTalks": "Previous talks",
+    "bioDescription": "Brings hands-on lessons from production projects and shares tools used in the team."
+  }
+}
+

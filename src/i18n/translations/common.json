@@ -1,0 +1,45 @@
+{
+  "cs": {
+    "nav": {
+      "home": "FrontKon 2026",
+      "talks": "Přednášky",
+      "workshops": "Workshopy",
+      "blog": "Blog",
+      "team": "Tým",
+      "archive": "Archiv"
+    },
+    "common": {
+      "back": "Zpět",
+      "read": "Číst",
+      "buy": "Koupit",
+      "view": "Zobrazit",
+      "more": "Více"
+    },
+    "footer": {
+      "organization": "Spolek Frontendisti.cz · Jurkovičova 988/26, Praha",
+      "codeOfConduct": "Code of Conduct"
+    }
+  },
+  "en": {
+    "nav": {
+      "home": "FrontKon 2026",
+      "talks": "Talks",
+      "workshops": "Workshops",
+      "blog": "Blog",
+      "team": "Team",
+      "archive": "Archive"
+    },
+    "common": {
+      "back": "Back",
+      "read": "Read",
+      "buy": "Buy",
+      "view": "View",
+      "more": "More"
+    },
+    "footer": {
+      "organization": "Frontendisti.cz Association · Jurkovičova 988/26, Prague",
+      "codeOfConduct": "Code of Conduct"
+    }
+  }
+}
+

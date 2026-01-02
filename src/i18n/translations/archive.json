@@ -1,0 +1,59 @@
+{
+  "cs": {
+    "title": "Archiv přednášek",
+    "eyebrow": "Archiv",
+    "subtitle": "Ročníky 2020–2025",
+    "description": "Procházej starší talky a workshopy. Přejdi na přehled přednášek, témat a spíkrů.",
+    "talks": {
+      "title": "Přednášky",
+      "description": "Vyhledávání a filtrování všech talků.",
+      "pageTitle": "Přednášky v archivu",
+      "pageSubtitle": "Přednášky 2020–2026",
+      "pageDescription": "Hledání, filtry podle roku a témat."
+    },
+    "topics": {
+      "title": "Témata",
+      "description": "Seznam témat a odkaz na relevantní talky.",
+      "pageTitle": "Témata v archivu",
+      "pageSubtitle": "Témata 2020–2026",
+      "pageDescription": "Proklikni na přednášky podle tématu.",
+      "talksCount": "přednášek"
+    },
+    "speakers": {
+      "title": "Spíkři",
+      "description": "Filtrovatelné profily řečníků.",
+      "pageTitle": "Spíkři v archivu",
+      "pageSubtitle": "Spíkři 2020–2026",
+      "pageDescription": "Filtrovat podle jména, firmy a roku výskytu."
+    }
+  },
+  "en": {
+    "title": "Talk archive",
+    "eyebrow": "Archive",
+    "subtitle": "Years 2020–2025",
+    "description": "Browse previous talks and workshops. Jump to talks, topics or speakers.",
+    "talks": {
+      "title": "Talks",
+      "description": "Searchable and filterable list.",
+      "pageTitle": "Talks in archive",
+      "pageSubtitle": "Talks 2020–2026",
+      "pageDescription": "Search, filter by year and topics."
+    },
+    "topics": {
+      "title": "Topics",
+      "description": "Topic list with links to talks.",
+      "pageTitle": "Topics in archive",
+      "pageSubtitle": "Topics 2020–2026",
+      "pageDescription": "Click through to talks by topic.",
+      "talksCount": "talks"
+    },
+    "speakers": {
+      "title": "Speakers",
+      "description": "Filter speakers by name and year.",
+      "pageTitle": "Speakers in archive",
+      "pageSubtitle": "Speakers 2020–2026",
+      "pageDescription": "Filter by name, company and year of appearance."
+    }
+  }
+}
+
