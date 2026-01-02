@@ -32,11 +32,12 @@ const t = getTranslationObject(lang, 'workshops');
     </div>
     <div class="grid">
       {frontKonData.workshops.map((ws) => (
-        <a class="card card-link" href={pref(`/${lang}/workshopy/${ws.id}/`)}>
+        <div class="card">
           <h3>{getText(ws.title, lang)}</h3>
           <p class="modal-description">{getText(ws.description, lang)}</p>
           <p class="list-meta">{ws.date} · {ws.time} · {ws.price}</p>
-        </a>
+          <a class="btn-secondary" href={pref(`/${lang}/workshopy/${ws.id}/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+        </div>
       ))}
     </div>
   </section>

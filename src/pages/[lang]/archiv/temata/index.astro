@@ -33,10 +33,11 @@ const t = getTranslationObject(lang, 'archive', 'topics');
       {frontKonData.topics.map((topic) => {
         const count = frontKonData.talks.filter((t) => t.topicIds.includes(topic.id)).length;
         return (
-          <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/`)}>
+          <div class="card">
             <h3>{getText(topic.name, lang)}</h3>
             <p class="modal-description">{count} {t.talksCount}</p>
-          </a>
+            <a class="btn-secondary" href={pref(`/${lang}/archiv/prednasky/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+          </div>
         );
       })}
     </div>

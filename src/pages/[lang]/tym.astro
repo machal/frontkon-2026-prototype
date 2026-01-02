@@ -35,6 +35,15 @@ const team = t.team || [];
           <h3>{member.name}</h3>
           <p class="modal-company">{member.role} · {member.company}</p>
           <p class="modal-description">{member.bio}</p>
+          {(member.email || member.links) && (
+            <div class="modal-links" style="margin-top: 1rem;">
+              {member.email && <a href={`mailto:${member.email}`}>Email</a>}
+              {member.links?.web && <a href={member.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
+              {member.links?.twitter && <a href={`https://twitter.com/${member.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
+              {member.links?.linkedin && <a href={`https://www.linkedin.com/in/${member.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+              {member.links?.github && <a href={`https://github.com/${member.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
+            </div>
+          )}
         </div>
       ))}
     </div>

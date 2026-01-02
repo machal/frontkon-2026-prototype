@@ -22,7 +22,9 @@ const year2026 = frontKonData.years.find((y) => y.id === '2026');
 const talks2026 = frontKonData.talks.filter((t) => t.yearId === '2026');
 const workshops2026 = frontKonData.workshops.filter((w) => w.yearId === '2026');
 const topWorkshops = workshops2026.slice(0, 3);
-const speakersHighlight = frontKonData.speakers.slice(0, 8);
+// Get real speakers for 2026 from HTML
+const realSpeakers2026 = ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25'];
+const speakersHighlight = realSpeakers2026.map(id => frontKonData.speakers.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => s !== undefined);
 const base = import.meta.env.BASE_URL || '/';
 const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
 
@@ -42,23 +44,43 @@ const t = {
 
 const faq = t.faq.items || [];
 const features = t.features.items || [];
-const socials = [
-  { label: 'YouTube', href: 'https://www.frontkon.cz/' },
-  { label: 'Instagram', href: 'https://www.frontkon.cz/' },
-  { label: 'Twitter / X', href: 'https://www.frontkon.cz/' },
-  { label: 'Facebook', href: 'https://www.frontkon.cz/' },
-  { label: 'LinkedIn', href: 'https://www.frontkon.cz/' },
+const socials = t.social.items || [];
+const partners = [
+  { name: 'CDN77', url: 'https://www.cdn77.com/', type: 'main' },
+  { name: 'Alma Career', url: 'https://magazin.almacareer.com/cz', type: 'partner' },
+  { name: 'GreenCode', url: 'https://greencode.cz/', type: 'partner' },
+  { name: 'Heureka Group', url: 'https://heureka.group/', type: 'partner' },
+  { name: 'Livesport', url: 'https://livesport.cz/', type: 'partner' },
+  { name: 'Make', url: 'https://make.com/', type: 'partner' },
+  { name: 'Mews', url: 'https://mews.com/', type: 'partner' },
+  { name: 'Outreach', url: 'https://outreach.io', type: 'partner' },
+  { name: 'Superkoders', url: 'https://superkoders.com/', type: 'afterparty' },
 ];
-const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', 'AI Frontiers', 'CloudNative', 'SecureWeb'];
 ---
 
 <BaseLayout title="FrontKon 2026" lang={lang}>
   <section class="hero-wireframe">
     <div class="hero-content">
-      <p class="eyebrow">{t.hero.date}</p>
+      <p class="eyebrow">{t.hero.date} · {t.hero.location}</p>
       <h2 class="hero-title">{t.hero.title}</h2>
       <p class="hero-tagline">{t.hero.tagline}</p>
+      <div class="cta-row" style="margin-top: 1rem;">
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.hero.ticketButton}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="margin-top: 2rem;">
+    <div class="section-header">
+      <p class="hero-meta" style="margin-top: 1rem;"><strong>{t.hero.whyBuy}</strong> {t.hero.whyBuyDesc}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
       <p class="hero-meta">{t.hero.meta}</p>
+      <p class="hero-meta">{t.hero.meta2}</p>
+      <p class="hero-meta">{t.hero.meta3}</p>
     </div>
   </section>
 
@@ -70,18 +92,65 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
     </div>
     <div class="grid">
       {speakersHighlight.map((speaker) => (
-        <a class="card card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)}>
-          <div class="speaker-avatar-large">
-            <div class="avatar-placeholder-image"></div>
-          </div>
-          <h3>{speaker.name}</h3>
-          <p class="modal-company">{speaker.company}</p>
-          <p class="modal-description">{getText(speaker.bio, lang)}</p>
-        </a>
+        <div class="card">
+          <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+            <div class="speaker-avatar-large">
+              <div class="avatar-placeholder-image"></div>
+            </div>
+            <h3>{speaker.name}</h3>
+            <p class="modal-company">{speaker.company}</p>
+            <p class="modal-description">{getText(speaker.bio, lang)}</p>
+          </a>
+          {speaker.links && (
+            <div class="modal-links" style="margin-top: 1rem;">
+              {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
+              {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
+              {speaker.links.web && <a href={speaker.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
+              {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+            </div>
+          )}
+        </div>
       ))}
     </div>
     <div class="cta-row" style="margin-top:1rem;">
-      <a class="nav-button" href={pref(`/${lang}/prednasky/`)}>{t.speakers.fullProgram}</a>
+      <a class="btn-secondary" href={pref(`/${lang}/prednasky/`)}>{t.speakers.fullProgram}</a>
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+      <p>{t.speakers.moreComing}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.archive.eyebrow}</p>
+      <h2>{t.archive.title}</h2>
+      <p class="subtitle">{t.archive.subtitle}</p>
+    </div>
+    <div style="max-width: 800px; margin: 0 auto 2rem;">
+      <div class="video-container" style="margin-bottom: 1rem;">
+        <iframe
+          width="100%"
+          height="450"
+          src="https://www.youtube.com/embed/w7IUpDYMZgk"
+          title="FrontKon 2025 Recap"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="border: 1px solid rgba(0, 0, 34, 0.2);"
+        ></iframe>
+      </div>
+    </div>
+    <div class="grid" style="max-width: 800px; margin: 0 auto;">
+      <div class="card">
+        <p class="list-title">{t.archive.photoGallery}</p>
+        <p class="modal-description">{t.archive.photoDescription}</p>
+        <a class="btn-secondary" href={pref(`/${lang}/archiv/`)}>{t.archive.view}</a>
+      </div>
+      <div class="card">
+        <p class="list-title">{t.archive.watchVideos}</p>
+        <p class="modal-description">{lang === 'cs' ? 'Podívej se na všechny záznamy z minulých ročníků na našem YouTube kanálu.' : 'Watch all recordings from previous years on our YouTube channel.'}</p>
+        <a class="btn-secondary" href={t.archive.youtubeUrl} target="_blank" rel="noopener noreferrer">{t.archive.watchVideos}</a>
+      </div>
     </div>
   </section>
 
@@ -96,19 +165,19 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
         <h3>{t.tickets.earlyBird.title}</h3>
         <p class="modal-description">{t.tickets.earlyBird.description}</p>
         <p class="list-title">{t.tickets.earlyBird.price}</p>
-        <a class="nav-button active" href="https://www.frontkon.cz/">{t.tickets.earlyBird.button}</a>
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.tickets.earlyBird.button}</a>
       </div>
       <div class="card">
         <h3>{t.tickets.standard.title}</h3>
         <p class="modal-description">{t.tickets.standard.description}</p>
         <p class="list-title">{t.tickets.standard.price}</p>
-        <a class="nav-button" href="https://www.frontkon.cz/">{t.tickets.standard.button}</a>
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.tickets.standard.button}</a>
       </div>
       <div class="card">
         <h3>{t.tickets.student.title}</h3>
         <p class="modal-description">{t.tickets.student.description}</p>
         <p class="list-title">{t.tickets.student.price}</p>
-        <a class="nav-button" href="https://www.frontkon.cz/">{t.tickets.student.button}</a>
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.tickets.student.button}</a>
       </div>
     </div>
   </section>
@@ -132,7 +201,7 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
   <section id={lang === 'cs' ? 'workshopy' : 'workshops'} class="section">
     <div class="section-header">
       <p class="eyebrow">{t.workshops.eyebrow}</p>
-      <h2>{t.workshops.title}</h2>
+      <h2>{lang === 'cs' ? 'Letošní novinka: workshopy' : 'This year\'s new: workshops'}</h2>
       <p class="subtitle">{t.workshops.subtitle}</p>
     </div>
     <div class="grid">
@@ -145,7 +214,7 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
       ))}
     </div>
     <div class="cta-row" style="margin-top:1rem;">
-      <a class="nav-button" href={pref(`/${lang}/workshopy/`)}>{t.workshops.more}</a>
+      <a class="btn-secondary" href={pref(`/${lang}/workshopy/`)}>{t.workshops.more}</a>
     </div>
   </section>
 
@@ -164,31 +233,6 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
     </div>
   </section>
 
-  <section class="section">
-    <div class="section-header">
-      <p class="eyebrow">{t.archive.eyebrow}</p>
-      <h2>{t.archive.title}</h2>
-      <p class="subtitle">{t.archive.subtitle}</p>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <div class="video-container">
-          <div class="video-placeholder">
-            <div class="video-placeholder-content">
-              <div class="play-icon">▶</div>
-              <p>{t.archive.recap}</p>
-            </div>
-          </div>
-        </div>
-        <a class="nav-button" href={pref(`/${lang}/archiv/`)}>{t.archive.goToArchive}</a>
-      </div>
-      <div class="card">
-        <p class="list-title">{t.archive.photoGallery}</p>
-        <p class="modal-description">{t.archive.photoDescription}</p>
-        <a class="nav-button" href={pref(`/${lang}/archiv/`)}>{t.archive.view}</a>
-      </div>
-    </div>
-  </section>
 
   <section class="section">
     <div class="section-header">
@@ -196,8 +240,8 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
       <h2>{t.social.title}</h2>
     </div>
     <div class="cta-row">
-      {socials.map((s) => (
-        <a class="nav-button" href={s.href}>{s.label}</a>
+      {socials.map((s: any) => (
+        <a class="btn-secondary" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
       ))}
     </div>
   </section>
@@ -208,13 +252,26 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
       <h2>{t.partners.title}</h2>
       <p class="subtitle">{t.partners.subtitle}</p>
     </div>
-    <div class="grid partners-grid">
-      {partners.map((partner) => (
-        <div class="card partner-card">
-          <p class="list-title">{partner}</p>
-          <p class="modal-description">{t.partners.partnerLabel}</p>
+    <div class="partners-container">
+      {partners.filter((p: any) => p.type === 'main').map((partner: any) => (
+        <div class="partner-main-wrapper">
+          <a class="card partner-card partner-main" href={partner.url} target="_blank" rel="noopener noreferrer">
+            <p class="list-title">{partner.name}</p>
+            <p class="modal-description">{lang === 'cs' ? 'Hlavní partner' : 'Main partner'}</p>
+          </a>
         </div>
       ))}
+      <div class="partners-grid">
+        {partners.filter((p: any) => p.type !== 'main').map((partner: any) => (
+          <a class="card partner-card" href={partner.url} target="_blank" rel="noopener noreferrer">
+            <p class="list-title">{partner.name}</p>
+            <p class="modal-description">{partner.type === 'afterparty' ? (lang === 'cs' ? 'Partner afterparty' : 'Afterparty partner') : (lang === 'cs' ? 'Partner' : 'Partner')}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="cta-row" style="margin-top: 1rem;">
+      <a class="btn-secondary" href="mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026">{t.partners.becomePartner}</a>
     </div>
   </section>
 
@@ -225,7 +282,7 @@ const partners = ['TechCorp', 'DesignStudio', 'VueCorp', 'PerfLab', 'EdgeOps', '
       <p class="modal-description">{t.newsletter.description}</p>
       <form class="newsletter-form" action="https://www.frontkon.cz/" method="post">
         <input class="newsletter-input" type="email" placeholder={t.newsletter.placeholder} required />
-        <button class="nav-button active" type="submit">{t.newsletter.button}</button>
+        <button class="btn-primary" type="submit">{t.newsletter.button}</button>
       </form>
     </div>
   </section>

@@ -6,10 +6,21 @@
     "description": "Lidé, kteří dělají FrontKon možným.",
     "team": [
       {
-        "name": "Lucie K.",
+        "name": "Tomáš Hejc",
+        "role": "Hlavní organizátor",
+        "company": "Frontendisti.cz",
+        "bio": "Koordinuje celou konferenci a vztahy s partnery.",
+        "email": "tomas.hejc@frontendisti.cz",
+        "links": {
+          "web": "https://www.frontendisti.cz/"
+        }
+      },
+      {
+        "name": "Kateřina Macháčková",
         "role": "Program",
         "company": "FrontKon",
-        "bio": "Kurátorka programu a vztahy se speakery."
+        "bio": "Kurátorka programu a vztahy se speakery.",
+        "email": "katerina.machackova@frontendisti.cz"
       },
       {
         "name": "Michal S.",
@@ -50,10 +61,21 @@
     "description": "People who make FrontKon happen.",
     "team": [
       {
-        "name": "Lucie K.",
+        "name": "Tomáš Hejc",
+        "role": "Main organizer",
+        "company": "Frontendisti.cz",
+        "bio": "Coordinates the entire conference and partner relations.",
+        "email": "tomas.hejc@frontendisti.cz",
+        "links": {
+          "web": "https://www.frontendisti.cz/"
+        }
+      },
+      {
+        "name": "Kateřina Macháčková",
         "role": "Program",
         "company": "FrontKon",
-        "bio": "Program curation and speaker relations."
+        "bio": "Program curation and speaker relations.",
+        "email": "katerina.machackova@frontendisti.cz"
       },
       {
         "name": "Michal S.",

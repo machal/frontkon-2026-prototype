@@ -16,8 +16,11 @@
       "more": "Více"
     },
     "footer": {
-      "organization": "Spolek Frontendisti.cz · Jurkovičova 988/26, Praha",
-      "codeOfConduct": "Code of Conduct"
+      "organization": "Provozuje Spolek Frontendisti.cz zapsaný u Městského soudu v Praze, Jurkovičova 988/26, Háje, 149 00 Praha 4, IČ: 03591263",
+      "association": "Spolek Frontendisti.cz",
+      "codeOfConduct": "Code of Conduct",
+      "termsOfService": "Obchodní podmínky",
+      "privacyPolicy": "Ochrana osobních údajů"
     }
   },
   "en": {
@@ -37,8 +40,11 @@
       "more": "More"
     },
     "footer": {
-      "organization": "Frontendisti.cz Association · Jurkovičova 988/26, Prague",
-      "codeOfConduct": "Code of Conduct"
+      "organization": "Operated by Frontendisti.cz Association registered at the Municipal Court in Prague, Jurkovičova 988/26, Háje, 149 00 Prague 4, ID: 03591263",
+      "association": "Frontendisti.cz Association",
+      "codeOfConduct": "Code of Conduct",
+      "termsOfService": "Terms of Service",
+      "privacyPolicy": "Privacy Policy"
     }
   }
 }

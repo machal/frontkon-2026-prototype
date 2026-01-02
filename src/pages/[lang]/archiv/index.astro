@@ -33,29 +33,33 @@ const t = getTranslationObject(lang, 'archive');
     </div>
     <div class="grid">
       {years.map((year) => (
-        <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/`)}>
+        <div class="card">
           <h3>{year.year}</h3>
           <p class="list-meta">{year.location}</p>
           <p class="modal-description">{getText(year.claim, lang)}</p>
-        </a>
+          <a class="btn-secondary" href={pref(`/${lang}/archiv/prednasky/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+        </div>
       ))}
     </div>
   </section>
 
   <section class="section">
     <div class="grid">
-      <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/`)}>
+      <div class="card">
         <h3>{t.talks.title}</h3>
         <p class="modal-description">{t.talks.description}</p>
-      </a>
-      <a class="card card-link" href={pref(`/${lang}/archiv/temata/`)}>
+        <a class="btn-secondary" href={pref(`/${lang}/archiv/prednasky/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+      </div>
+      <div class="card">
         <h3>{t.topics.title}</h3>
         <p class="modal-description">{t.topics.description}</p>
-      </a>
-      <a class="card card-link" href={pref(`/${lang}/archiv/spikri/`)}>
+        <a class="btn-secondary" href={pref(`/${lang}/archiv/temata/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+      </div>
+      <div class="card">
         <h3>{t.speakers.title}</h3>
         <p class="modal-description">{t.speakers.description}</p>
-      </a>
+        <a class="btn-secondary" href={pref(`/${lang}/archiv/spikri/`)} style="margin-top: 0.5rem;">{getTranslationObject(lang, 'common', 'common').view}</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

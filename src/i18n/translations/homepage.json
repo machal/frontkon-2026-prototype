@@ -1,21 +1,29 @@
 {
   "cs": {
     "hero": {
-      "date": "3. října 2026 · Praha, O2 Universum",
+      "date": "6. října 2026",
+      "location": "Praha, O2 Universum",
       "title": "FrontKon vstupuje do pátého roku a posouvá se na další úroveň.",
-      "tagline": "900 účastníků · 3 stage · hloubkové přednášky · víc mezinárodních řečníků",
-      "meta": "Očekávejte 3 stage a hloubkové přednášky, které jdou daleko za základy."
+      "tagline": "900 účastníků — 6. října 2026 — Praha, O2 Universum.",
+      "meta": "Očekávejte 3 stage a hloubkové přednášky, které jdou daleko za základy.",
+      "meta2": "Navíc silná komunitní atmosféra a spousta prostoru pro setkání s lidmi, kteří posouvají frontend vpřed.",
+      "meta3": "V roce 2026 přinášíme více mezinárodních řečníků a otevřenější formát. Poprvé bude konference vstřícná k angličtině.",
+      "whyBuy": "Proč si koupit vstupenku už teď?",
+      "whyBuyDesc": "Program a detaily jsou stále v přípravě, ale své místo na akci, která se každý rok vyprodá, si můžete zajistit už dnes.",
+      "ticketButton": "Early bird vstupenky"
     },
     "speakers": {
-      "eyebrow": "Speakeři",
-      "title": "Výběr řečníků",
-      "subtitle": "Návrat oblíbenců i nové tváře.",
-      "fullProgram": "Celý program"
+      "eyebrow": "Potvrzení řečníci",
+      "title": "Potvrzení řečníci",
+      "subtitle": "Každým dnem pracujeme na tom, aby na seznamu byli nejlepší řečníci a aktuální témata.",
+      "fullProgram": "Celý program",
+      "moreComing": "Připravujeme další řečníky"
     },
     "tickets": {
       "eyebrow": "Vstupenky",
       "title": "Early bird vstupenky",
       "subtitle": "Kup si vstupenku dřív a ušetři. Konference se každý rok vyprodá.",
+      "buyUrl": "https://form.simpleshop.cz/jDEEV/buy/",
       "earlyBird": {
         "title": "Early Bird",
         "description": "Nejlepší cena pro ty, kteří chtějí zajistit místo včas.",
@@ -41,16 +49,16 @@
       "subtitle": "Podle plánu pro 2026 přidáváme angličtinu a zůstává komunita.",
       "items": [
         {
-          "title": "3 stage, hloubkové přednášky",
-          "desc": "Žádné základy, ale produkční know-how od lidí z praxe."
+          "title": "Přes 30 skvělých řečníků s různými tématy",
+          "desc": "Každým dnem pracujeme na tom, aby na seznamu byli nejlepší řečníci a aktuální témata."
         },
         {
-          "title": "900+ účastníků",
+          "title": "Letos očekáváme více než 900 účastníků",
           "desc": "Silná komunita, prostor na setkání i hallway track."
         },
         {
-          "title": "Více mezinárodních řečníků",
-          "desc": "Rok 2026 je otevřenější angličtině a globálním tématům."
+          "title": "Opět 3 nabité stage a našlapaný program",
+          "desc": "Hloubkové přednášky, které jdou daleko za základy."
         }
       ]
     },
@@ -66,7 +74,7 @@
       "items": [
         {
           "q": "Kde se FrontKon 2026 koná?",
-          "a": "Praha, O2 Universum, 3. října 2026."
+          "a": "Praha, O2 Universum, 6. října 2026."
         },
         {
           "q": "Proč koupit vstupenku už teď?",
@@ -87,9 +95,11 @@
       ]
     },
     "archive": {
-      "eyebrow": "Vzpomínky na 2025",
-      "title": "Video a fotky z FrontKon 2025",
-      "subtitle": "Mrkni na záznamy a fotogalerii. Archiv je vždy otevřený.",
+      "eyebrow": "Vzpomínky na FrontKon 2025",
+      "title": "Vzpomínky na FrontKon 2025",
+      "subtitle": "Podívej se na minulou konferenci očima fotografa nebo rovnou nasaj atmosféru z videa.",
+      "watchVideos": "Mrkni se na videa z loňska",
+      "youtubeUrl": "https://www.youtube.com/@FrontendistiCz",
       "recap": "Záznam 2025",
       "goToArchive": "Do archivu",
       "photoGallery": "Fotogalerie",
@@ -97,13 +107,37 @@
       "view": "Zobrazit"
     },
     "social": {
-      "eyebrow": "Sociální sítě",
-      "title": "Buď v obraze"
+      "eyebrow": "Sleduj sociální sítě",
+      "title": "Sleduj sociální sítě",
+      "items": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@FrontendistiCz"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/frontendisti/"
+        },
+        {
+          "label": "Twitter",
+          "url": "https://twitter.com/Frontendisti"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/frontendisti/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/company/frontendisti/"
+        }
+      ]
     },
     "partners": {
-      "eyebrow": "Partneři 2026",
-      "title": "Podpora komunity",
-      "subtitle": "Díky partnerům můžeme držet kvalitu obsahu i zázemí.",
+      "eyebrow": "Partneři konference",
+      "title": "Partneři konference",
+      "subtitle": "Naši partneři jsou srdcem komunity. Díky jejich podpoře můžeme zajistit potřebné zázemí a vytvářet nové příležitosti pro všechny.",
+      "becomePartner": "Chci podpořit letošní FrontKon",
+      "partnerEmail": "mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026",
       "partnerLabel": "Partner FrontKon 2026"
     },
     "newsletter": {
@@ -116,21 +150,29 @@
   },
   "en": {
     "hero": {
-      "date": "October 3, 2026 · Prague, O2 Universum",
+      "date": "October 6, 2026",
+      "location": "Prague, O2 Universum",
       "title": "FrontKon enters its fifth year and levels up.",
-      "tagline": "900 attendees · 3 stages · deep-dive talks · more international speakers",
-      "meta": "Expect 3 stages and deep-dive talks that go far beyond the basics."
+      "tagline": "900 attendees — October 6, 2026 — Prague, O2 Universum.",
+      "meta": "Expect 3 stages and deep-dive talks that go far beyond the basics.",
+      "meta2": "Plus a strong community atmosphere and plenty of space to meet people who are pushing frontend forward.",
+      "meta3": "In 2026, we're bringing more international speakers and a more open format. For the first time, the conference will be English-friendly.",
+      "whyBuy": "Why buy tickets now?",
+      "whyBuyDesc": "The program and details are still being prepared, but you can secure your spot at an event that sells out every year today.",
+      "ticketButton": "Early bird tickets"
     },
     "speakers": {
-      "eyebrow": "Speakers",
-      "title": "Featured speakers",
-      "subtitle": "Fan favorites returning with new faces.",
-      "fullProgram": "Full program"
+      "eyebrow": "Confirmed speakers",
+      "title": "Confirmed speakers",
+      "subtitle": "Every day we work to bring the best speakers and current topics to the list.",
+      "fullProgram": "Full program",
+      "moreComing": "More speakers coming soon"
     },
     "tickets": {
       "eyebrow": "Tickets",
       "title": "Early bird tickets",
       "subtitle": "Buy early and save. Conference sells out every year.",
+      "buyUrl": "https://form.simpleshop.cz/jDEEV/buy/",
       "earlyBird": {
         "title": "Early Bird",
         "description": "Best price for those who want to secure a spot early.",
@@ -156,16 +198,16 @@
       "subtitle": "More English-friendly content, community spirit stays.",
       "items": [
         {
-          "title": "3 stages, deep talks",
-          "desc": "No basics — production-grade lessons from practitioners."
+          "title": "Over 30 great speakers with various topics",
+          "desc": "Every day we work to bring the best speakers and current topics to the list."
         },
         {
-          "title": "900+ attendees",
+          "title": "We expect more than 900 attendees this year",
           "desc": "Strong community, lots of space for hallway track."
         },
         {
-          "title": "More international speakers",
-          "desc": "2026 goes more global and English-friendly."
+          "title": "Again 3 packed stages and a full program",
+          "desc": "Deep-dive talks that go far beyond the basics."
         }
       ]
     },
@@ -181,7 +223,7 @@
       "items": [
         {
           "q": "Where is FrontKon 2026?",
-          "a": "Prague, O2 Universum, October 3, 2026."
+          "a": "Prague, O2 Universum, October 6, 2026."
         },
         {
           "q": "Why buy tickets early?",
@@ -202,9 +244,11 @@
       ]
     },
     "archive": {
-      "eyebrow": "FrontKon 2025",
-      "title": "Video & photos from 2025",
-      "subtitle": "Watch recordings and gallery. Archive is always open.",
+      "eyebrow": "Memories of FrontKon 2025",
+      "title": "Memories of FrontKon 2025",
+      "subtitle": "See last year's conference through a photographer's eyes or soak up the atmosphere from the video.",
+      "watchVideos": "Watch videos from last year",
+      "youtubeUrl": "https://www.youtube.com/@FrontendistiCz",
       "recap": "2025 recap",
       "goToArchive": "Go to archive",
       "photoGallery": "Photo gallery",
@@ -212,13 +256,37 @@
       "view": "View"
     },
     "social": {
-      "eyebrow": "Social",
-      "title": "Stay in the loop"
+      "eyebrow": "Follow social media",
+      "title": "Follow social media",
+      "items": [
+        {
+          "label": "YouTube",
+          "url": "https://www.youtube.com/@FrontendistiCz"
+        },
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/frontendisti/"
+        },
+        {
+          "label": "Twitter",
+          "url": "https://twitter.com/Frontendisti"
+        },
+        {
+          "label": "Facebook",
+          "url": "https://www.facebook.com/frontendisti/"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/company/frontendisti/"
+        }
+      ]
     },
     "partners": {
-      "eyebrow": "Partners 2026",
-      "title": "Community support",
-      "subtitle": "Partners help us keep quality content and production.",
+      "eyebrow": "Conference partners",
+      "title": "Conference partners",
+      "subtitle": "Our partners are the heart of the community. Thanks to their support, we can provide the necessary infrastructure and create new opportunities for everyone.",
+      "becomePartner": "I want to support this year's FrontKon",
+      "partnerEmail": "mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026",
       "partnerLabel": "FrontKon 2026 partner"
     },
     "newsletter": {

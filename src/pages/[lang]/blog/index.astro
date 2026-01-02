@@ -33,12 +33,12 @@ const t = getTranslationObject(lang, 'blog');
     </div>
     <div class="grid">
       {posts.map((post) => (
-        <a class="card card-link" href={pref(`/${lang}/blog/${post.id}/`)}>
+        <div class="card">
           <h3>{getText(post.title, lang)}</h3>
           <p class="list-meta">{post.date}</p>
           <p class="modal-description">{getText(post.perex, lang)}</p>
-          <span class="nav-button">{t.read}</span>
-        </a>
+          <a class="btn-secondary" href={pref(`/${lang}/blog/${post.id}/`)} style="margin-top: 0.5rem;">{t.read}</a>
+        </div>
       ))}
     </div>
   </section>
