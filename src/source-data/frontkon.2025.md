@@ -120,3 +120,4 @@ Tým lidí, kteří vybírají řečníky a témata pro konferenci.
 - [Facebook #frontkon](https://www.facebook.com/hashtag/frontkon)
 - [X (Twitter) #FrontKon](https://x.com/search?q=%23FrontKon&src=hashtag_click)
 
+

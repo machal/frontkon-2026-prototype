@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "deploy": "BASE_PATH=/frontkon-prototype/ npm run build"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/react": "^4.0.7",

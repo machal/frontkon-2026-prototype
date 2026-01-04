@@ -22,9 +22,9 @@ jobs:
       
       - name: Install, build, and upload your site
         uses: withastro/action@v2
-        # If deploying to a subfolder, uncomment and set BASE_PATH:
         env:
-          BASE_PATH: /frontkon-prototype/
+          BASE_PATH: /frontkon-2026-prototype/
+          NODE_ENV: production
         with:
           path: .
           node-version: 20
@@ -40,3 +40,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

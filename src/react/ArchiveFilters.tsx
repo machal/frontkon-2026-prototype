@@ -100,16 +100,13 @@ export function ArchiveFilters({ talks, speakers, topics, lang, base = '/' }: Pr
           const speaker = speakers.find((s) => s.id === talk.speakerId);
           const href = `${base.replace(/\/$/, '')}/${lang}/talks/${talk.id}/`;
           return (
-            <div key={talk.id} className="card" style={{ background: '#fff' }}>
+            <a key={talk.id} className="card card-link" style={{ background: '#fff' }} href={href}>
               <div className="list-title">{getText(talk.title, lang)}</div>
               <div className="list-meta">
                 {talk.yearId} · {talk.time} · {speaker?.name}
               </div>
               <div className="list-tags">{mapTopics(topics, talk.topicIds, lang).join(', ')}</div>
-              <a className="btn-secondary" href={href} style={{ marginTop: '0.5rem' }}>
-                {lang === 'cs' ? 'Zobrazit' : 'View'}
-              </a>
-            </div>
+            </a>
           );
         })}
       </div>

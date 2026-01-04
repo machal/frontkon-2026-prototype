@@ -58,22 +58,16 @@ export function SpeakerFilters({ speakers, talks, lang, base = '/' }: Props) {
 
       <div className="grid">
         {filtered.map((speaker) => (
-          <div
+          <a
             key={speaker.id}
-            className="card"
+            className="card card-link"
             style={{ background: '#fff' }}
+            href={`${base.replace(/\/$/, '')}/${lang}/speakers/${speaker.id}/`}
           >
             <h3>{speaker.name}</h3>
             <p className="modal-company">{speaker.company}</p>
             <p className="modal-description">{getText(speaker.bio, lang)}</p>
-            <a
-              className="btn-secondary"
-              href={`${base.replace(/\/$/, '')}/${lang}/speakers/${speaker.id}/`}
-              style={{ marginTop: '0.5rem' }}
-            >
-              {lang === 'cs' ? 'Zobrazit' : 'View'}
-            </a>
-          </div>
+          </a>
         ))}
       </div>
     </div>
