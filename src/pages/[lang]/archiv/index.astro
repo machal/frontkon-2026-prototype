@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
 import type { Locale } from '@/data/types';
+import { getText } from '@/utils/content';
 import { getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
 
@@ -18,14 +20,49 @@ const lang: Locale = (langParam && languages.includes(langParam as Locale))
 const base = import.meta.env.BASE_URL || '/';
 const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
 const t = getTranslationObject(lang, 'archive');
+
+// Ročníky 2021-2025
+const archiveYears = frontKonData.years.filter((y) => {
+  const year = parseInt(y.id);
+  return year >= 2021 && year <= 2025;
+}).reverse(); // Od nejnovějšího po nejstarší
 ---
 
 <BaseLayout title={t.title} lang={lang}>
+  <!-- Motivační blok -->
   <section class="section">
     <div class="section-header">
-      <p class="eyebrow">{t.eyebrow}</p>
-      <h2>{t.subtitle}</h2>
-      <p class="subtitle">{t.description}</p>
+      <h2>{t.motivationTitle}</h2>
+    </div>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div style="background: rgba(0, 0, 34, 0.05); border: 1px solid rgba(0, 0, 34, 0.2); padding: 3rem; text-align: center; color: rgba(0, 0, 34, 0.6);">
+        <p>{t.motivationText}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ročníky 2021-2025 -->
+  <section class="section">
+    <div class="section-header">
+      <h2>{t.yearsTitle}</h2>
+      <p class="subtitle">{t.yearsSubtitle}</p>
+    </div>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+      {archiveYears.map((year) => (
+        <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/?year=${year.id}`)}>
+          <h3>FrontKon {year.year}</h3>
+          <p class="modal-description">{getText(year.claim, lang)}</p>
+          <p class="list-meta">{year.date} · {year.location}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Odkazy na Přednášky, Témata, Spíkři -->
+  <section class="section">
+    <div class="section-header">
+      <h2>{lang === 'cs' ? 'Procházení archivu' : 'Browse archive'}</h2>
+      <p class="subtitle">{lang === 'cs' ? 'Prozkoumej archiv podle kategorie' : 'Explore archive by category'}</p>
     </div>
     <div class="grid">
       <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/`)}>

@@ -3,6 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import type { Locale } from '@/data/types';
 import { getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
+import { frontKonData } from '@/data/frontkon-data';
+import { getText } from '@/utils/content';
 
 export function getStaticPaths() {
   return languages.map((lang) => ({
@@ -16,7 +18,25 @@ const lang: Locale = (langParam && languages.includes(langParam as Locale))
   : defaultLanguage;
 
 const t = getTranslationObject(lang, 'tym');
-const team = t.team || [];
+const organizers = t.organizers || [];
+const committee = t.committee || [];
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+// Najít řečníky pro komisi podle speakerId nebo jména
+const committeeWithSpeakers = committee.map((member: any) => {
+  let speaker = null;
+  if (member.speakerId && member.speakerId !== '') {
+    speaker = frontKonData.speakers.find((s) => s.id === member.speakerId);
+  } else {
+    // Fallback: najít podle jména
+    speaker = frontKonData.speakers.find((s) => s.name === member.name);
+  }
+  return {
+    ...member,
+    speaker,
+  };
+});
 ---
 
 <BaseLayout title={t.title} lang={lang}>
@@ -26,27 +46,120 @@ const team = t.team || [];
       <h2>{t.subtitle}</h2>
       <p class="subtitle">{t.description}</p>
     </div>
-    <div class="grid">
-      {team.map((member: any) => (
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2>{t.mainOrganizers}</h2>
+    </div>
+    <div class="grid team-grid-5">
+      {organizers.map((member: any) => (
         <div class="card">
           <div class="speaker-avatar-large">
             <div class="avatar-placeholder-image"></div>
           </div>
           <h3>{member.name}</h3>
-          <p class="modal-company">{member.role} · {member.company}</p>
-          <p class="modal-description">{member.bio}</p>
-          {(member.email || member.links) && (
-            <div class="modal-links" style="margin-top: 1rem;">
-              {member.email && <a href={`mailto:${member.email}`}>Email</a>}
-              {member.links?.web && <a href={member.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
-              {member.links?.twitter && <a href={`https://twitter.com/${member.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
-              {member.links?.linkedin && <a href={`https://www.linkedin.com/in/${member.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-              {member.links?.github && <a href={`https://github.com/${member.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
-            </div>
-          )}
+          <p class="modal-company">{member.role}</p>
+          {member.bio && <p class="modal-description">{member.bio}</p>}
+          <div class="modal-links" style="margin-top: 1rem;">
+            {member.email && member.email !== '' && <a href={`mailto:${member.email}`}>Email</a>}
+            {member.links && member.links.linkedin && member.links.linkedin !== '' && (
+              <a href={`https://www.linkedin.com/in/${member.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            )}
+          </div>
         </div>
       ))}
     </div>
   </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2>{t.programCommittee}</h2>
+    </div>
+    <div class="grid team-grid-5">
+      {committeeWithSpeakers.map((member: any) => {
+        const speaker = member.speaker;
+        
+        // Stejná struktura jako na homepage - pokud je řečník, použij jeho data a odkaz
+        if (speaker) {
+          return (
+            <div class="card">
+              <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+                <div class="speaker-avatar-large">
+                  <div class="avatar-placeholder-image"></div>
+                </div>
+                <h3>{speaker.name}</h3>
+                <p class="modal-company">{speaker.company}</p>
+                <p class="modal-description">{getText(speaker.bio, lang)}</p>
+              </a>
+              {speaker.links && speaker.links.linkedin && (
+                <div class="modal-links" style="margin-top: 1rem;">
+                  <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </div>
+              )}
+            </div>
+          );
+        }
+        
+        // Pokud není řečník, použij vlastní data (bez odkazu) - ale stejná struktura jako na homepage
+        return (
+          <div class="card">
+            <div class="speaker-avatar-large">
+              <div class="avatar-placeholder-image"></div>
+            </div>
+            <h3>{member.name}</h3>
+            {member.company && <p class="modal-company">{member.company}</p>}
+            {member.bio && <p class="modal-description">{member.bio}</p>}
+            {member.links && member.links.linkedin && member.links.linkedin !== '' && (
+              <div class="modal-links" style="margin-top: 1rem;">
+                <a href={`https://www.linkedin.com/in/${member.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="section">
+    <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: rgba(0, 0, 34, 0.05); border: 1px solid rgba(0, 0, 34, 0.2);">
+      <h3 style="font-size: 24px; margin-bottom: 1rem;">{t.generalContactTitle}</h3>
+      <p style="font-size: 20px; margin-bottom: 0.5rem;">
+        <a href={`mailto:${t.generalContact}`} style="color: rgb(0, 0, 34); text-decoration: none;">{t.generalContact}</a>
+      </p>
+      <p style="font-size: 18px; margin-top: 1rem;">
+        <a href={`tel:${t.phone}`} style="color: rgb(0, 0, 34); text-decoration: none;">{t.phone}</a>
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .team-grid-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .team-grid-5 .card {
+      width: 100%;
+      min-width: 0;
+    }
+
+    @media (max-width: 1400px) {
+      .team-grid-5 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .team-grid-5 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .team-grid-5 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </BaseLayout>
 

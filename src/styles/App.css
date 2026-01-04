@@ -232,6 +232,29 @@ body {
   }
 }
 
+/* Archive talks grid - 4 side by side full width */
+.archive-talks-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+  .archive-talks-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .archive-talks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .archive-talks-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Social buttons - centered boxes */
 .social-buttons {
   justify-content: center;
@@ -392,30 +415,56 @@ body {
 
 .footer {
   margin-top: 4rem;
-  padding: 2rem 0;
+  padding: 2rem 0 1rem;
   border-top: 1px solid rgba(0, 0, 34, 0.1);
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.footer-text {
-  color: rgba(0, 0, 34, 0.7);
-  font-size: 18px;
-}
-
-.footer-links {
+.footer-content {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
 }
 
-.footer-links a {
+.footer-links-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links-row a {
   color: rgb(0, 0, 34);
   text-decoration: underline;
   font-size: 18px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-social-link {
+  color: rgb(0, 0, 34);
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.footer-organization {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 34, 0.1);
+}
+
+.footer-org-text {
+  color: rgba(0, 0, 34, 0.6);
+  font-size: 14px;
+  margin: 0;
 }
 
 .modal-overlay {

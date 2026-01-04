@@ -5,3 +5,5 @@
 {"location":"astro.config.mjs:11","message":"BASE_PATH configured","data":{"basePath":"/","nodeEnv":"development"},"timestamp":1767508986218,"sessionId":"debug-session","runId":"deploy-check","hypothesisId":"A"}
 {"location":"astro.config.mjs:11","message":"BASE_PATH configured","data":{"basePath":"/","nodeEnv":"development"},"timestamp":1767509658227,"sessionId":"debug-session","runId":"deploy-check","hypothesisId":"A"}
 {"location":"astro.config.mjs:11","message":"BASE_PATH configured","data":{"basePath":"/","nodeEnv":"development"},"timestamp":1767510122730,"sessionId":"debug-session","runId":"deploy-check","hypothesisId":"A"}
+{"location":"astro.config.mjs:11","message":"BASE_PATH configured","data":{"basePath":"/","nodeEnv":"development"},"timestamp":1767512969497,"sessionId":"debug-session","runId":"deploy-check","hypothesisId":"A"}
+{"location":"astro.config.mjs:11","message":"BASE_PATH configured","data":{"basePath":"/","nodeEnv":"development"},"timestamp":1767513319063,"sessionId":"debug-session","runId":"deploy-check","hypothesisId":"A"}

@@ -2,109 +2,247 @@
   "cs": {
     "title": "Tým FrontKon",
     "eyebrow": "Tým",
-    "subtitle": "Organizátoři",
-    "description": "Lidé, kteří dělají FrontKon možným.",
-    "team": [
+    "subtitle": "Náš tým a kontakty",
+    "description": "Stojíme o tvoji podporu i názory.",
+    "phone": "+420 730 171 545",
+    "contactTitle": "Napište nám",
+    "mainOrganizers": "Organizátoři",
+    "programCommittee": "Programová komise",
+    "organizers": [
       {
-        "name": "Tomáš Hejc",
+        "name": "Kristýna Chládková",
         "role": "Hlavní organizátor",
-        "company": "Frontendisti.cz",
+        "company": "",
         "bio": "Koordinuje celou konferenci a vztahy s partnery.",
-        "email": "tomas.hejc@frontendisti.cz",
+        "email": "kristyna.chladkova@frontendisti.cz",
         "links": {
-          "web": "https://www.frontendisti.cz/"
+          "twitter": "",
+          "linkedin": "kristyna-chladkova"
         }
       },
       {
-        "name": "Lucie K.",
-        "role": "Program",
-        "company": "FrontKon",
-        "bio": "Kurátorka programu a vztahy se speakery."
+        "name": "Břetislav Proft",
+        "role": "Partneři, rozpočet",
+        "company": "",
+        "bio": "Stará se o partnery a rozpočet konference.",
+        "email": "bretislav.proft@frontendisti.cz",
+        "links": {
+          "twitter": "",
+          "linkedin": "bretislav-proft"
+        }
       },
       {
-        "name": "Michal S.",
-        "role": "Produkce",
-        "company": "FrontKon",
-        "bio": "Produkční řízení a stage management."
+        "name": "Martin Michálek",
+        "role": "Obsah, workshopy",
+        "company": "",
+        "bio": "Kurátor obsahu a koordinátor workshopů.",
+        "email": "martin.michalek@frontendisti.cz",
+        "links": {
+          "linkedin": "martin-michalek"
+        }
       },
       {
-        "name": "Denisa V.",
-        "role": "UX",
-        "company": "FrontKon",
-        "bio": "Zážitek účastníků a obsah webu."
+        "name": "Tomáš Hejč",
+        "role": "Web, technika",
+        "company": "",
+        "bio": "Vývojář webu a technický garant konference.",
+        "email": "tomas.hejc@frontendisti.cz",
+        "links": {
+          "linkedin": "tomas-hejc"
+        }
       },
       {
-        "name": "Adam P.",
-        "role": "DevOps",
-        "company": "FrontKon",
-        "bio": "Build pipeline a CI/CD pro web."
-      },
-      {
-        "name": "Tereza L.",
-        "role": "Komunita",
-        "company": "FrontKon",
-        "bio": "Komunikace s partnery a dobrovolníky."
-      },
-      {
-        "name": "Filip R.",
-        "role": "Video",
-        "company": "FrontKon",
-        "bio": "Stream, záznamy a postprodukce."
+        "name": "Kateřina N. Voláková",
+        "role": "Sociální sítě",
+        "company": "",
+        "bio": "Spravuje sociální sítě a komunikaci s komunitou.",
+        "email": "katerina.volakova@frontendisti.cz",
+        "links": {
+          "linkedin": "katerina-volakova"
+        }
       }
-    ]
+    ],
+    "committee": [
+      {
+        "name": "Martin Michálek",
+        "role": "",
+        "company": "Frontendisti.cz",
+        "bio": "Kurátor programu a výběru řečníků.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "martin-michalek"
+        }
+      },
+      {
+        "name": "Libor Vaněk",
+        "role": "",
+        "company": "Independent",
+        "bio": "Expert na frontend architekturu a výkon.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "libor-vanek"
+        }
+      },
+      {
+        "name": "Tereza Vaňková",
+        "role": "",
+        "company": "Design Studio",
+        "bio": "Designérka zaměřená na UX a přístupnost.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "terezavankova"
+        }
+      },
+      {
+        "name": "Marek Velas",
+        "role": "",
+        "company": "TechCorp",
+        "bio": "Senior vývojář a tech lead s dlouholetými zkušenostmi.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "marek-velas"
+        }
+      },
+      {
+        "name": "Borek Bernard",
+        "role": "",
+        "company": "StartupXYZ",
+        "bio": "Full-stack vývojář a propagátor moderních technologií.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "borek-bernard"
+        }
+      }
+    ],
+    "generalContact": "konference@frontendisti.cz",
+    "generalContactTitle": "Obecný kontakt"
   },
   "en": {
     "title": "FrontKon Team",
     "eyebrow": "Team",
-    "subtitle": "Organizers",
-    "description": "People who make FrontKon happen.",
-    "team": [
+    "subtitle": "Our team and contacts",
+    "description": "We value your support and opinions.",
+    "phone": "+420 730 171 545",
+    "contactTitle": "Contact us",
+    "mainOrganizers": "Organizers",
+    "programCommittee": "Program committee",
+    "organizers": [
       {
-        "name": "Tomáš Hejc",
+        "name": "Kristýna Chládková",
         "role": "Main organizer",
-        "company": "Frontendisti.cz",
+        "company": "",
         "bio": "Coordinates the entire conference and partner relations.",
-        "email": "tomas.hejc@frontendisti.cz",
+        "email": "kristyna.chladkova@frontendisti.cz",
         "links": {
-          "web": "https://www.frontendisti.cz/"
+          "twitter": "",
+          "linkedin": "kristyna-chladkova"
         }
       },
       {
-        "name": "Lucie K.",
-        "role": "Program",
-        "company": "FrontKon",
-        "bio": "Program curation and speaker relations."
+        "name": "Břetislav Proft",
+        "role": "Partners, budget",
+        "company": "",
+        "bio": "Manages partners and conference budget.",
+        "email": "bretislav.proft@frontendisti.cz",
+        "links": {
+          "twitter": "",
+          "linkedin": "bretislav-proft"
+        }
       },
       {
-        "name": "Michal S.",
-        "role": "Production",
-        "company": "FrontKon",
-        "bio": "Production lead and stage management."
+        "name": "Martin Michálek",
+        "role": "Content, workshops",
+        "company": "",
+        "bio": "Content curator and workshop coordinator.",
+        "email": "martin.michalek@frontendisti.cz",
+        "links": {
+          "linkedin": "martin-michalek"
+        }
       },
       {
-        "name": "Denisa V.",
-        "role": "UX",
-        "company": "FrontKon",
-        "bio": "Attendee experience and web content."
+        "name": "Tomáš Hejč",
+        "role": "Web, technology",
+        "company": "",
+        "bio": "Web developer and technical lead of the conference.",
+        "email": "tomas.hejc@frontendisti.cz",
+        "links": {
+          "linkedin": "tomas-hejc"
+        }
       },
       {
-        "name": "Adam P.",
-        "role": "DevOps",
-        "company": "FrontKon",
-        "bio": "Build pipeline and CI/CD."
-      },
-      {
-        "name": "Tereza L.",
-        "role": "Community",
-        "company": "FrontKon",
-        "bio": "Partners, volunteers and community."
-      },
-      {
-        "name": "Filip R.",
-        "role": "Video",
-        "company": "FrontKon",
-        "bio": "Streaming, recordings and post-production."
+        "name": "Kateřina N. Voláková",
+        "role": "Social media",
+        "company": "",
+        "bio": "Manages social media and community communication.",
+        "email": "katerina.volakova@frontendisti.cz",
+        "links": {
+          "linkedin": "katerina-volakova"
+        }
       }
-    ]
+    ],
+    "committee": [
+      {
+        "name": "Martin Michálek",
+        "role": "",
+        "company": "Frontendisti.cz",
+        "bio": "Program curator and speaker selection.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "martin-michalek"
+        }
+      },
+      {
+        "name": "Libor Vaněk",
+        "role": "",
+        "company": "Independent",
+        "bio": "Expert in frontend architecture and performance.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "libor-vanek"
+        }
+      },
+      {
+        "name": "Tereza Vaňková",
+        "role": "",
+        "company": "Design Studio",
+        "bio": "Designer focused on UX and accessibility.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "terezavankova"
+        }
+      },
+      {
+        "name": "Marek Velas",
+        "role": "",
+        "company": "TechCorp",
+        "bio": "Senior developer and tech lead with extensive experience.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "marek-velas"
+        }
+      },
+      {
+        "name": "Borek Bernard",
+        "role": "",
+        "company": "StartupXYZ",
+        "bio": "Full-stack developer and advocate of modern technologies.",
+        "email": "",
+        "speakerId": "",
+        "links": {
+          "linkedin": "borek-bernard"
+        }
+      }
+    ],
+    "generalContact": "konference@frontendisti.cz",
+    "generalContactTitle": "General contact"
   }
 }

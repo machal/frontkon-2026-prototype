@@ -4,6 +4,10 @@
     "eyebrow": "Archiv",
     "subtitle": "Ročníky 2020–2025",
     "description": "Procházej starší talky a workshopy. Přejdi na přehled přednášek, témat a spíkrů.",
+    "motivationTitle": "Proč archiv?",
+    "motivationText": "[Placeholder - Proč je archiv venku a co obsahuje: záznamy přednášek, fotogalerie, materiály z minulých ročníků, možnost procházet historii konference]",
+    "yearsTitle": "Ročníky",
+    "yearsSubtitle": "Vyber si konkrétní ročník a prozkoumej jeho obsah",
     "talks": {
       "title": "Přednášky",
       "description": "Vyhledávání a filtrování všech talků.",
@@ -32,6 +36,10 @@
     "eyebrow": "Archive",
     "subtitle": "Years 2020–2025",
     "description": "Browse previous talks and workshops. Jump to talks, topics or speakers.",
+    "motivationTitle": "Why archive?",
+    "motivationText": "[Placeholder - Why the archive is available and what it contains: talk recordings, photo galleries, materials from previous years, ability to browse conference history]",
+    "yearsTitle": "Years",
+    "yearsSubtitle": "Select a specific year and explore its content",
     "talks": {
       "title": "Talks",
       "description": "Searchable and filterable list.",

@@ -19,6 +19,7 @@ const otherLangHref = base.replace(/\/$/, '') + toggleLangPath(currentPath.repla
 
 const nav = getTranslationObject(lang, 'common', 'nav');
 const footer = getTranslationObject(lang, 'common', 'footer');
+const social = getTranslationObject(lang, 'homepage', 'social');
 
 const navLinks = [
   { href: withLangPrefix('/', lang), label: nav.home },
@@ -68,17 +69,33 @@ const navLinks = [
       </main>
 
       <footer class="footer">
-        <div class="footer-left">
-          <p class="eyebrow">{footer.association}</p>
-          <p class="footer-text">{footer.organization}</p>
+        <div class="footer-content">
+          <!-- Řada odkazů: Code of Conduct, Obchodní podmínky, Ochrana osobních údajů -->
+          <div class="footer-links-row">
+            <a href="https://www.frontkon.cz/">{footer.codeOfConduct}</a>
+            <a href="https://www.frontkon.cz/">{footer.termsOfService}</a>
+            <a href="https://www.frontkon.cz/">{footer.privacyPolicy}</a>
+          </div>
+
+          <!-- Sociální sítě - centrované -->
+          <div class="footer-social">
+            {(social.items || []).map((item: any) => (
+              <a href={item.url} target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                {item.label}
+              </a>
+            ))}
+          </div>
         </div>
-        <div class="footer-links">
-          <a href="https://www.frontkon.cz/">FrontKon</a>
+
+        <!-- Info o spolku - malým centrovaným -->
+        <div class="footer-organization">
+          <p class="footer-org-text">{footer.organization}</p>
+        </div>
+
+        <!-- Odkazy Frontendisti.cz a Frontkec - úplně dolů -->
+        <div class="footer-links-row" style="margin-top: 1rem;">
           <a href="https://www.frontendisti.cz/">Frontendisti.cz</a>
           <a href="https://www.frontkec.cz/">Frontkec</a>
-          <a href="https://www.frontkon.cz/">{footer.codeOfConduct}</a>
-          <a href="https://www.frontkon.cz/">{footer.termsOfService}</a>
-          <a href="https://www.frontkon.cz/">{footer.privacyPolicy}</a>
         </div>
       </footer>
     </div>
