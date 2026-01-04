@@ -70,27 +70,52 @@
     },
     "faq": {
       "eyebrow": "FAQ",
-      "title": "Často kladené dotazy",
+      "title": "Nejčastější dotazy",
+      "subtitle": "Přehledně to nejdůležitější, co potřebuješ vědět",
       "items": [
         {
-          "q": "Kde se FrontKon 2026 koná?",
-          "a": "Praha, O2 Universum, 6. října 2026."
+          "q": "Kde se FrontKon koná?",
+          "a": "Těšíme se na tebe v prostorách O2 Universum, Českomoravská 2345/17, 190 00 Praha 9."
         },
         {
-          "q": "Proč koupit vstupenku už teď?",
-          "a": "Konference se pravidelně vyprodá, early bird ti zajistí místo a lepší cenu."
+          "q": "Jak se na místo dostanu pomocí MHD?",
+          "a": "Nejbližší stanice metra je Českomoravská (linka B). O2 Universum je přímo u výstupu z metra. Můžeš také použít tramvaj číslo 1, 10 nebo 16, zastávka Českomoravská."
         },
         {
-          "q": "Je akce přístupná v angličtině?",
-          "a": "Ano, přidáváme více mezinárodních řečníků a EN-friendly obsah."
+          "q": "Jak se na konferenci dostanu autem?",
+          "a": "O2 Universum nabízí placené parkování v podzemních garážích. Alternativně můžeš využít parkovací místa v okolí areálu."
         },
         {
-          "q": "Budou záznamy na YouTube?",
-          "a": "Ano, všechny přednášky budou zveřejněny po akci."
+          "q": "Je možné se v okolí ubytovat?",
+          "a": "Ano, v okolí O2 Universum je několik hotelů. Po zakoupení vstupenky obdržíš v potvrzovacím e-mailu doporučení na ubytování v blízkosti konference. Ale mysli na to, že ubytovací kapacita je omezená. Takže kdo dřív přijde, ten dřív mele. 🙂"
         },
         {
-          "q": "Je web připravený pro GitHub Pages?",
-          "a": "Ano, generujeme čistě statické MPA s nastavitelným base."
+          "q": "Co si vzít s sebou?",
+          "a": "Pro vstup na konferenci potřebuješ platnou vstupenku s čárovým kódem, kterou ukážeš u registrace. Myslíme ekologicky, takže samozřejmě stačí, když ji budeš mít v mobilu. Jinak nezapomeň dobrou náladu a defragmentaci hlavy, protože ta dostane naloženo!"
+        },
+        {
+          "q": "Můžu si vstupenku koupit až na místě?",
+          "a": "Loni bylo vyprodáno už měsíc před akcí, takže si svůj lístek určitě zajisti předem."
+        },
+        {
+          "q": "Co mě na FrontKonu čeká kromě přednášek?",
+          "a": "Kromě sálů s nabitým programem plným přednášek a workshopů tě čeká chill-out zóna, speakers corner, stánky našich partnerů či fotokoutek. Určitě se je na co těšit! Po skončení oficiálního programu navazuje afterparty, která bude pro snadnou dostupnost přímo v areálu O2 Universum."
+        },
+        {
+          "q": "Jak bude během dne zajištěno stravování?",
+          "a": "Vodu, kávu a čaj budeš mít po celý den zdarma. Pro majitele Early bird vstupenky a vstupenky včetně oběda a vstupenky Podporovatel komunity bude nachystané jídlo servírované v restauraci v areálu. V druhé polovině září ti přijde e-mail, kde si zaškrtneš jídlo, které si dáš. Na výběr máme: Masová varianta: Vepřový guláš s houskovým knedlíkem. Bezlepková a bezlaktózová varianta: Kuřecí prsa s kůží, ratatouille. Vegetariánská varianta: Lasagne s drcenými rajčaty, špenátem a bešamelem. Veganská varianta: Zeleninové curry s kokosovým mlékem, jasmínová rýže. Na místě si budeš moci další občerstvení zakoupit. Připravujeme nabídku slaných i sladkých snacků a samozřejmě nápoje."
+        },
+        {
+          "q": "Co dělat, když si chci dokoupit jen oběd?",
+          "a": "Napiš nám na mail konference@frontendisti.cz a domluvíme se, jaké jsou možnosti."
+        },
+        {
+          "q": "V jakém jazyce budou přednášky?",
+          "a": "Téměř všechny přednášky si poslechneš jednoduše v češtině, ale je možné, že některé přednášky budou anglicky. V roce 2026 přidáváme více mezinárodních řečníků a konference bude vstřícná k angličtině. Věříme, že ti to vadit nebude."
+        },
+        {
+          "q": "Budou k dispozici záznamy přednášek?",
+          "a": "Máme v plánu, že záznamy přednášek budou a po konferenci je budeme postupně dávat na náš YouTube. Ale garantovat u všech to nemůžeme. Takže raději doraz osobně a zažij sílu komunity na vlastní kůži."
         }
       ]
     },
@@ -219,27 +244,52 @@
     },
     "faq": {
       "eyebrow": "FAQ",
-      "title": "Frequently asked",
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know, clearly organized",
       "items": [
         {
-          "q": "Where is FrontKon 2026?",
-          "a": "Prague, O2 Universum, October 6, 2026."
+          "q": "Where is FrontKon held?",
+          "a": "We're looking forward to seeing you at O2 Universum, Českomoravská 2345/17, 190 00 Prague 9."
         },
         {
-          "q": "Why buy tickets early?",
-          "a": "The event sells out; early bird secures your seat and price."
+          "q": "How do I get there by public transport?",
+          "a": "The nearest metro station is Českomoravská (line B). O2 Universum is right at the metro exit. You can also take tram number 1, 10, or 16, stop Českomoravská."
         },
         {
-          "q": "Is the event English-friendly?",
-          "a": "Yes, more international speakers and EN-friendly content."
+          "q": "How do I get to the conference by car?",
+          "a": "O2 Universum offers paid parking in underground garages. Alternatively, you can use parking spaces in the surrounding area."
         },
         {
-          "q": "Will talks be on YouTube?",
-          "a": "Yes, all talks will be published after the event."
+          "q": "Is accommodation available nearby?",
+          "a": "Yes, there are several hotels near O2 Universum. After purchasing a ticket, you'll receive accommodation recommendations near the conference in your confirmation email. But keep in mind that accommodation capacity is limited. So first come, first served. 🙂"
         },
         {
-          "q": "Ready for GitHub Pages?",
-          "a": "Yes, static MPA with configurable base path."
+          "q": "What should I bring?",
+          "a": "For entry to the conference, you'll need a valid ticket with a barcode that you'll show at registration. We think eco-friendly, so of course it's enough to have it on your phone. Otherwise, don't forget a good mood and defrag your brain, because it's going to get loaded!"
+        },
+        {
+          "q": "Can I buy a ticket at the venue?",
+          "a": "Last year it was sold out a month before the event, so definitely secure your ticket in advance."
+        },
+        {
+          "q": "What awaits me at FrontKon besides talks?",
+          "a": "In addition to halls with a packed program full of talks and workshops, you can look forward to a chill-out zone, speakers corner, partner booths, and a photo booth. There's definitely something to look forward to! After the official program ends, an afterparty follows, which will be right at O2 Universum for easy access."
+        },
+        {
+          "q": "How will food be provided during the day?",
+          "a": "Water, coffee, and tea will be available free of charge all day. For Early Bird ticket holders and tickets including lunch and Community Supporter tickets, prepared meals will be served at the restaurant on site. In the second half of September, you'll receive an email where you can select your meal. Options include: Meat option: Pork goulash with bread dumplings. Gluten-free and lactose-free option: Chicken breast with skin, ratatouille. Vegetarian option: Lasagna with crushed tomatoes, spinach, and béchamel. Vegan option: Vegetable curry with coconut milk, jasmine rice. Additional refreshments can be purchased on site. We're preparing a selection of savory and sweet snacks and of course beverages."
+        },
+        {
+          "q": "What should I do if I want to add just lunch?",
+          "a": "Write to us at konference@frontendisti.cz and we'll discuss the options."
+        },
+        {
+          "q": "What language will the talks be in?",
+          "a": "Almost all talks will be in Czech, but some talks may be in English. In 2026, we're adding more international speakers and the conference will be English-friendly. We believe this won't be a problem for you."
+        },
+        {
+          "q": "Will recordings of talks be available?",
+          "a": "We plan to have recordings of talks and will gradually publish them on our YouTube after the conference. But we can't guarantee this for all talks. So it's better to come in person and experience the power of the community firsthand."
         }
       ]
     },

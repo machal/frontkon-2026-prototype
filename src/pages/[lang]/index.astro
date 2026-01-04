@@ -23,6 +23,9 @@ const workshops2026 = frontKonData.workshops.filter((w) => w.yearId === '2026');
 const topWorkshops = workshops2026.slice(0, 3);
 const realSpeakers2026 = ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25'];
 const speakersHighlight = realSpeakers2026.map(id => frontKonData.speakers.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => s !== undefined);
+const topSpeakers = speakersHighlight.filter(s => s.id === 'sp-21' || s.id === 'sp-22');
+const otherSpeakers = speakersHighlight.filter(s => s.id !== 'sp-21' && s.id !== 'sp-22');
+const latestBlogPosts = [...frontKonData.blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
 const base = import.meta.env.BASE_URL || '/';
 const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
 
@@ -87,8 +90,30 @@ const partners = [
       <h2>{t.speakers.title}</h2>
       <p class="subtitle">{t.speakers.subtitle}</p>
     </div>
-    <div class="grid">
-      {speakersHighlight.map((speaker) => (
+    <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+      {topSpeakers.map((speaker) => (
+        <div class="card" style="max-width: 300px;">
+          <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+            <div class="speaker-avatar-large">
+              <div class="avatar-placeholder-image"></div>
+            </div>
+            <h3>{speaker.name}</h3>
+            <p class="modal-company">{speaker.company}</p>
+            <p class="modal-description">{getText(speaker.bio, lang)}</p>
+          </a>
+          {speaker.links && (
+            <div class="modal-links" style="margin-top: 1rem;">
+              {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
+              {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
+              {speaker.links.web && <a href={speaker.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
+              {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <div class="grid speakers-grid" style="justify-items: center; margin-top: 2rem;">
+      {otherSpeakers.map((speaker) => (
         <div class="card">
           <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
             <div class="speaker-avatar-large">
@@ -137,17 +162,9 @@ const partners = [
         ></iframe>
       </div>
     </div>
-    <div class="grid" style="max-width: 800px; margin: 0 auto;">
-      <div class="card">
-        <p class="list-title">{t.archive.photoGallery}</p>
-        <p class="modal-description">{t.archive.photoDescription}</p>
-        <a class="nav-button" href={pref(`/${lang}/archiv/`)}>{t.archive.view}</a>
-      </div>
-      <div class="card">
-        <p class="list-title">{t.archive.watchVideos}</p>
-        <p class="modal-description">{lang === 'cs' ? 'Podívej se na všechny záznamy z minulých ročníků na našem YouTube kanálu.' : 'Watch all recordings from previous years on our YouTube channel.'}</p>
-        <a class="nav-button" href={t.archive.youtubeUrl} target="_blank" rel="noopener noreferrer">{t.archive.watchVideos}</a>
-      </div>
+    <div class="cta-row" style="justify-content: center; margin-top: 2rem;">
+      <a class="btn-secondary" href={pref(`/${lang}/archiv/`)}>{t.archive.view}</a>
+      <a class="btn-secondary" href={t.archive.youtubeUrl} target="_blank" rel="noopener noreferrer">{t.archive.watchVideos}</a>
     </div>
   </section>
 
@@ -157,7 +174,7 @@ const partners = [
       <h2>{t.tickets.title}</h2>
       <p class="subtitle">{t.tickets.subtitle}</p>
     </div>
-    <div class="grid">
+    <div class="grid tickets-grid">
       <div class="card">
         <h3>{t.tickets.earlyBird.title}</h3>
         <p class="modal-description">{t.tickets.earlyBird.description}</p>
@@ -185,7 +202,7 @@ const partners = [
       <h2>{t.features.title}</h2>
       <p class="subtitle">{t.features.subtitle}</p>
     </div>
-    <div class="grid">
+    <div class="grid features-grid">
       {features.map((item: any) => (
         <div class="card">
           <h3>{item.title}</h3>
@@ -201,13 +218,16 @@ const partners = [
       <h2>{lang === 'cs' ? 'Letošní novinka: workshopy' : 'This year\'s new: workshops'}</h2>
       <p class="subtitle">{t.workshops.subtitle}</p>
     </div>
-    <div class="grid">
+    <div class="grid workshops-grid">
       {topWorkshops.map((ws) => (
-        <a class="card card-link" href={pref(`/${lang}/workshopy/${ws.id}/`)}>
+        <div class="card">
           <h3>{getText(ws.title, lang)}</h3>
           <p class="modal-description">{getText(ws.description, lang)}</p>
           <p class="list-meta">{ws.duration} {getTranslation(lang, 'workshops', 'min')} · {getTranslation(lang, 'workshops', 'capacityLabel')} {ws.capacity} · {ws.price}</p>
-        </a>
+          <div style="margin-top: 1rem;">
+            <a class="btn-secondary" href={pref(`/${lang}/workshopy/${ws.id}/`)}>{lang === 'cs' ? 'Detail workshopu' : 'Workshop details'}</a>
+          </div>
+        </div>
       ))}
     </div>
     <div class="cta-row" style="margin-top:1rem;">
@@ -219,14 +239,29 @@ const partners = [
     <div class="section-header">
       <p class="eyebrow">{t.faq.eyebrow}</p>
       <h2>{t.faq.title}</h2>
+      {t.faq.subtitle && <p class="subtitle">{t.faq.subtitle}</p>}
     </div>
-    <div class="accordion">
-      {faq.map((item: any) => (
-        <details class="accordion-item">
-          <summary>{item.q}</summary>
-          <p>{item.a}</p>
-        </details>
+    <div class="grid workshops-grid" style="margin-bottom: 3rem;">
+      {latestBlogPosts.map((post) => (
+        <div class="card">
+          <h3>{getText(post.title, lang)}</h3>
+          <p class="modal-description">{getText(post.perex, lang)}</p>
+          <p class="list-meta">{post.date}</p>
+          <div style="margin-top: 1rem;">
+            <a class="btn-secondary" href={pref(`/${lang}/blog/${post.id}/`)}>{lang === 'cs' ? 'Přečíst více' : 'Read more'}</a>
+          </div>
+        </div>
       ))}
+    </div>
+    <div style="margin-top: 3rem;">
+      <div class="grid" style="grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+        {faq.map((item: any) => (
+          <details class="accordion-item">
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -235,9 +270,9 @@ const partners = [
       <p class="eyebrow">{t.social.eyebrow}</p>
       <h2>{t.social.title}</h2>
     </div>
-    <div class="cta-row">
+    <div class="cta-row social-buttons">
       {socials.map((s: any) => (
-        <a class="nav-button" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+        <a class="btn-secondary" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
       ))}
     </div>
   </section>
@@ -266,8 +301,8 @@ const partners = [
         ))}
       </div>
     </div>
-    <div class="cta-row" style="margin-top: 1rem;">
-      <a class="nav-button" href="mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026">{t.partners.becomePartner}</a>
+    <div class="cta-row" style="margin-top: 1rem; justify-content: center;">
+      <a class="btn-secondary" href="mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026">{t.partners.becomePartner}</a>
     </div>
   </section>
 
