@@ -35,6 +35,65 @@ export function getStaticPaths() {
 if (!post) {
   throw Astro.redirect(`/${lang}/blog/`);
 }
+
+// Simple markdown parser for headings and paragraphs
+function parseMarkdown(content: string): string {
+  const lines = content.split('\n');
+  let html = '';
+  let inParagraph = false;
+  let paragraphContent = '';
+  let imageCount = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    
+    // Headings (##)
+    if (line.startsWith('## ')) {
+      if (inParagraph) {
+        html += `<p>${paragraphContent}</p>`;
+        paragraphContent = '';
+        inParagraph = false;
+      }
+      html += `<h2>${line.substring(3)}</h2>`;
+      // Add image placeholder after some headings (every 2nd heading)
+      imageCount++;
+      if (imageCount % 2 === 0) {
+        html += `<div style="background: rgba(0, 0, 34, 0.05); border: 1px solid rgba(0, 0, 34, 0.2); padding: 2rem; margin: 2rem 0; text-align: center; color: rgba(0, 0, 34, 0.6);">
+          <p style="margin: 0;">[Placeholder pro fotku]</p>
+        </div>`;
+      }
+    }
+    // Empty lines
+    else if (line === '') {
+      if (inParagraph) {
+        html += `<p>${paragraphContent}</p>`;
+        paragraphContent = '';
+        inParagraph = false;
+      }
+    }
+    // Regular content
+    else {
+      if (!inParagraph) {
+        inParagraph = true;
+        paragraphContent = '';
+      }
+      // Parse links [text](url)
+      let processedLine = line.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color: rgb(0, 0, 34); text-decoration: underline;">$1</a>');
+      // Parse inline code `code`
+      processedLine = processedLine.replace(/`([^`]+)`/g, '<code style="background: rgba(0, 0, 34, 0.1); padding: 0.2em 0.4em; border-radius: 3px; font-family: monospace; font-size: 0.9em;">$1</code>');
+      paragraphContent += (paragraphContent ? ' ' : '') + processedLine;
+    }
+  }
+  
+  // Close last paragraph
+  if (inParagraph && paragraphContent) {
+    html += `<p>${paragraphContent}</p>`;
+  }
+  
+  return html;
+}
+
+const parsedContent = parseMarkdown(post.content);
 ---
 
 <BaseLayout title={getText(post.title, lang)} lang={lang}>
@@ -44,11 +103,42 @@ if (!post) {
       <h1>{getText(post.title, lang)}</h1>
       <p class="list-meta">{post.date} · {author?.name}</p>
     </div>
-    <div class="detail-content">
-      <p class="detail-description">{getText(post.perex, lang)}</p>
-      <div class="modal-description">{post.content}</div>
+    <div class="detail-content" style="max-width: 800px; margin: 0 auto;">
+      <p class="detail-description" style="font-size: 20px; color: rgba(0, 0, 34, 0.8); margin-bottom: 2rem;">{getText(post.perex, lang)}</p>
+      <div class="modal-description" style="line-height: 1.8;" set:html={parsedContent}></div>
     </div>
   </div>
+
+  <style>
+    .detail-content h2 {
+      font-size: 36px;
+      font-weight: 600;
+      color: rgb(0, 0, 34);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      font-family: 'League Spartan', sans-serif;
+    }
+    
+    .detail-content h2:first-of-type {
+      margin-top: 0;
+    }
+    
+    .detail-content p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: rgb(0, 0, 34);
+      margin-bottom: 1.5rem;
+    }
+    
+    .detail-content a {
+      color: rgb(0, 0, 34);
+      text-decoration: underline;
+    }
+    
+    .detail-content a:hover {
+      color: rgba(0, 0, 34, 0.7);
+    }
+  </style>
 </BaseLayout>
 
 

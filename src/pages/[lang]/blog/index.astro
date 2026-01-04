@@ -34,11 +34,14 @@ const t = getTranslationObject(lang, 'blog');
       {blogPosts.map((post) => {
         const author = frontKonData.speakers.find((s) => s.id === post.authorId);
         return (
-          <a class="card card-link" href={pref(`/${lang}/blog/${post.id}/`)}>
+          <div class="card">
             <h3>{getText(post.title, lang)}</h3>
             <p class="modal-description">{getText(post.perex, lang)}</p>
             <p class="list-meta">{post.date} · {author?.name}</p>
-          </a>
+            <div style="margin-top: 1rem;">
+              <a class="btn-secondary" href={pref(`/${lang}/blog/${post.id}/`)}>{t.read}</a>
+            </div>
+          </div>
         );
       })}
     </div>

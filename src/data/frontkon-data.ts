@@ -204,7 +204,7 @@ export const frontKonData: FrontKonData = {
       title: l('Jak jsme stavěli FrontKon', 'How we built FrontKon'),
       perex: l('Architektura a lessons learned.', 'Architecture and lessons learned.'),
       content:
-        '## Making of FrontKon\n\nPrvní verzi jsme stavěli za šest týdnů s důrazem na statický export a jednoduché nasazení. Nakonec jsme zvolili Astro MPA a React pro interaktivní části.\n\nZajímá tě víc? Mrkni na [archiv přednášek](/cs/archiv/prednasky/) a porovnej stack z minulých ročníků.\n\nDruhá iterace přinesla lepší data model a i18n vrstvu, abychom mohli doručit EN verzi současně.\n\nV další fázi chceme vylepšit DX, aby kurátoři mohli snadno přidávat obsah.\n\nPokud chceš detailní changelog, sleduj náš blog a přidej se do diskuse na Discordu.',
+        '## Making of FrontKon\n\nPrvní verzi jsme stavěli za šest týdnů s důrazem na statický export a jednoduché nasazení. Nakonec jsme zvolili Astro MPA a React pro interaktivní části. Cílem bylo vytvořit rychlý a spolehlivý web, který se snadno nasadí a udržuje.\n\nZajímá tě víc? Mrkni na [archiv přednášek](/cs/archiv/prednasky/) a porovnej stack z minulých ročníků. Každý rok experimentujeme s novými přístupy a učíme se z předchozích zkušeností.\n\n## Architektura a rozhodnutí\n\nDruhá iterace přinesla lepší data model a i18n vrstvu, abychom mohli doručit EN verzi současně. Data jsou centralizovaná v TypeScript souborech, což umožňuje snadnou správu a validaci.\n\nV další fázi chceme vylepšit DX, aby kurátoři mohli snadno přidávat obsah. Plánujeme přidat admin rozhraní nebo alespoň lepší workflow pro správu dat.\n\n## Co dál?\n\nPokud chceš detailní changelog, sleduj náš blog a přidej se do diskuse na Discordu. Rádi sdílíme naše zkušenosti a učíme se od komunity.',
       authorId: 'sp-04',
       date: '2024-11-01',
     },
@@ -213,7 +213,7 @@ export const frontKonData: FrontKonData = {
       title: l('Design tokens: náš přístup', 'Design tokens: our approach'),
       perex: l('Jak jsme sjednotili brand.', 'How we unified the brand.'),
       content:
-        '## Tokens end-to-end\n\nZačali jsme inventurou všech stylů a vytvořili mapu hodnot pro barvy, typografii a spacing. První iterace vznikla ve Figma, následně jsme exportovali do YAML.\n\nV CI generujeme balíčky pro web i mobil. Používáme i kontrolu proti driftu, aby produktové týmy nezaváděly hodnoty mimo tokeny.\n\nVíce k tématu najdeš v sekci [přednášky](/cs/archiv/prednasky/) nebo v talku o design systems.\n\nOtevřeli jsme i malou interní knihovnu `@frontkon/tokens` a plánujeme ji ukázat komunitě.\n\nPokud chceš detailní pipeline, napiš nám – rádi sdílíme configy.',
+        '## Tokens end-to-end\n\nZačali jsme inventurou všech stylů a vytvořili mapu hodnot pro barvy, typografii a spacing. První iterace vznikla ve Figma, následně jsme exportovali do YAML. Tento proces nám umožnil systematicky projít všechny designové rozhodnutí a vytvořit konzistentní systém.\n\n## Z Figmy do kódu\n\nV CI generujeme balíčky pro web i mobil. Používáme i kontrolu proti driftu, aby produktové týmy nezaváděly hodnoty mimo tokeny. Automatizace nám šetří čas a zajišťuje konzistenci napříč platformami.\n\nVíce k tématu najdeš v sekci [přednášky](/cs/archiv/prednasky/) nebo v talku o design systems. Workshopy o design tokenech jsou také velmi populární.\n\n## Open source plány\n\nOtevřeli jsme i malou interní knihovnu `@frontkon/tokens` a plánujeme ji ukázat komunitě. Chceme sdílet naše zkušenosti a pomoci ostatním týmům implementovat podobné systémy.\n\nPokud chceš detailní pipeline, napiš nám – rádi sdílíme configy a pomůžeme s implementací.',
       authorId: 'sp-13',
       date: '2025-01-10',
     },
@@ -222,7 +222,7 @@ export const frontKonData: FrontKonData = {
       title: l('Perf budžety v CI', 'Perf budgets in CI'),
       perex: l('Automatizace výkonu.', 'Automating performance.'),
       content:
-        '## Performance jako kontrakt\n\nNastavili jsme rozpočty pro LCP, FID a CLS a hlídáme je na každém PR. Pipeline padá, pokud limit překročíme.\n\nPoužíváme Lighthouse CI a syntetická měření, ale také RUM pro verzi ve výrobě. Spojením dat získáváme realističtější obraz.\n\nPro hlubší vhled doporučujeme talky k tématu výkonu v [archivu](/cs/archiv/prednasky/).\n\nCI reporty sdílíme v týmu na Slacku a při regresi se automaticky zakládá ticket.\n\nVýsledkem je stabilnější UX a menší šum při releasech.',
+        '## Performance jako kontrakt\n\nNastavili jsme rozpočty pro LCP, FID a CLS a hlídáme je na každém PR. Pipeline padá, pokud limit překročíme. Tento přístup nám pomáhá udržet výkon pod kontrolou a předcházet regresím.\n\n## Měření a monitoring\n\nPoužíváme Lighthouse CI a syntetická měření, ale také RUM pro verzi ve výrobě. Spojením dat získáváme realističtější obraz o skutečném výkonu pro uživatele. Syntetická měření nám dávají rychlou zpětnou vazbu, zatímco RUM data ukazují reálné zkušenosti.\n\nPro hlubší vhled doporučujeme talky k tématu výkonu v [archivu](/cs/archiv/prednasky/). Workshopy o performance jsou také velmi žádané.\n\n## Automatizace a reporting\n\nCI reporty sdílíme v týmu na Slacku a při regresi se automaticky zakládá ticket. Tím zajišťujeme, že problémy s výkonem neuniknou pozornosti a jsou řešeny okamžitě.\n\nVýsledkem je stabilnější UX a menší šum při releasech. Uživatelé si všimnou rozdílu a my můžeme s jistotou nasazovat nové verze.',
       authorId: 'sp-07',
       date: '2025-02-15',
     },
@@ -231,7 +231,7 @@ export const frontKonData: FrontKonData = {
       title: l('Vue i React na jedné konferenci', 'Vue and React together'),
       perex: l('Kurátorský výběr přednášek.', 'Curated talk selection.'),
       content:
-        '## Kurátorský mix\n\nFrontend svět je pestrý, proto mixujeme React i Vue track. Každý rok vybíráme témata, která se potkávají v praxi (performance, DX, design systémy).\n\nOdráží se to i v programu 2026, kde React i Vue běží paralelně na různých stage.\n\nV archivu najdeš konkrétní příklady migrací mezi frameworky a lessons learned.\n\nRozcestník k oběma ekosystémům najdeš v sekci [témata](/cs/archiv/temata/).\n\nBudeme rádi za návrhy přednášek do dalšího ročníku – napiš nám.',
+        '## Kurátorský mix\n\nFrontend svět je pestrý, proto mixujeme React i Vue track. Každý rok vybíráme témata, která se potkávají v praxi (performance, DX, design systémy). Naším cílem je ukázat, že různé frameworky řeší podobné problémy a můžeme se učit jeden od druhého.\n\n## Program 2026\n\nOdráží se to i v programu 2026, kde React i Vue běží paralelně na různých stage. Účastníci si mohou vybrat track podle svých preferencí, nebo se pohybovat mezi stage a získat širší pohled.\n\nV archivu najdeš konkrétní příklady migrací mezi frameworky a lessons learned. Mnoho přednášek se věnuje přechodům mezi ekosystémy a sdílení zkušeností.\n\nRozcestník k oběma ekosystémům najdeš v sekci [témata](/cs/archiv/temata/). Tam najdeš přednášky seskupené podle technologií a témat.\n\n## Přispěj svým nápadem\n\nBudeme rádi za návrhy přednášek do dalšího ročníku – napiš nám. Komunita je pro nás důležitá a rádi slyšíme, co by tě zajímalo.',
       authorId: 'sp-06',
       date: '2025-03-20',
     },
@@ -240,7 +240,7 @@ export const frontKonData: FrontKonData = {
       title: l('A11y jako standard', 'A11y as standard'),
       perex: l('Pravidla pro naše stage.', 'Rules for our stages.'),
       content:
-        '## Přístupnost jako baseline\n\nKaždá stage má požadavky na kontrast, titulky a přístupné slidedecky. Spíkrům posíláme checklist předem.\n\nPři produkci webu využíváme axe a manuální testy čteček. Své postupy sdílíme na workshopech.\n\nPřístupnost se prolíná také do design systému – viz talky v [archivu](/cs/archiv/prednasky/).\n\nPřipravujeme open-source ukázku pipeline, která ověřuje WCAG kritéria na PR.\n\nPokud máš tipy na další nástroje, pošli nám je – rádi je vyzkoušíme.',
+        '## Přístupnost jako baseline\n\nKaždá stage má požadavky na kontrast, titulky a přístupné slidedecky. Spíkrům posíláme checklist předem, aby věděli, co od nich očekáváme. Přístupnost není volitelná – je to základní požadavek pro všechny naše přednášky.\n\n## Testování a validace\n\nPři produkci webu využíváme axe a manuální testy čteček. Své postupy sdílíme na workshopech, kde účastníci mohou vidět praktické příklady a vyzkoušet si nástroje na vlastní kůži.\n\nPřístupnost se prolíná také do design systému – viz talky v [archivu](/cs/archiv/prednasky/). Mnoho přednášek se věnuje právě tomuto tématu a sdílení best practices.\n\n## Automatizace a budoucnost\n\nPřipravujeme open-source ukázku pipeline, která ověřuje WCAG kritéria na PR. Chceme ukázat, jak lze přístupnost integrovat do vývojového workflow a automaticky kontrolovat.\n\nPokud máš tipy na další nástroje, pošli nám je – rádi je vyzkoušíme. Komunita je pro nás důležitým zdrojem inspirace a zlepšování.',
       authorId: 'sp-09',
       date: '2025-04-12',
     },
@@ -249,7 +249,7 @@ export const frontKonData: FrontKonData = {
       title: l('Edge a CDN tipy', 'Edge and CDN tips'),
       perex: l('Snížení latence.', 'Lowering latency.'),
       content:
-        '## Edge first\n\nPřesun statického obsahu na edge nám snížil TTFB o desítky ms. Experimentujeme i s edge SSR a cache variantami.\n\nKlíčové je dobré logování a ladění invalidace; sdílíme checklist na workshopu Edge rendering.\n\nK tématu najdeš i talky v [archivu](/cs/archiv/prednasky/) – performance track.\n\nBudoucí plány: měřit dopad na Core Web Vitals a publikovat case study.\n\nPokud máš zkušenost s multi-CDN setupem, ozvi se, rádi uděláme panel.',
+        '## Edge first\n\nPřesun statického obsahu na edge nám snížil TTFB o desítky ms. Experimentujeme i s edge SSR a cache variantami. Výsledky jsou viditelné – uživatelé zaznamenali rychlejší načítání a lepší zkušenost.\n\n## Cache strategie\n\nKlíčové je dobré logování a ladění invalidace; sdílíme checklist na workshopu Edge rendering. Správná cache strategie může výrazně zlepšit výkon, ale také způsobit problémy, pokud není správně nastavena.\n\nK tématu najdeš i talky v [archivu](/cs/archiv/prednasky/) – performance track. Mnoho řečníků sdílí své zkušenosti s edge computingem a CDN optimalizací.\n\n## Měření a analýza\n\nBudoucí plány: měřit dopad na Core Web Vitals a publikovat case study. Chceme ukázat konkrétní čísla a dopad našich optimalizací na reálné uživatele.\n\nPokud máš zkušenost s multi-CDN setupem, ozvi se, rádi uděláme panel. Komunita má spoustu zkušeností a rádi je sdílíme.',
       authorId: 'sp-16',
       date: '2025-05-05',
     },
@@ -258,7 +258,7 @@ export const frontKonData: FrontKonData = {
       title: l('AI v přípravě programu', 'AI for planning the program'),
       perex: l('Jak AI pomáhá kurátorům.', 'How AI helps curators.'),
       content:
-        '## AI jako asistent kurátora\n\nPoužíváme AI pro návrhy slotů a kontrolu témat proti duplicitám. Výsledky vždy projde kurátor.\n\nModely nám pomáhají seskupovat podobná témata a hledat mezery v programu.\n\nV talku o AI & DX ukazujeme i praktické workflow – najdeš ho v [archivu](/cs/archiv/prednasky/).\n\nPlánujeme A/B testy agendy podle preferencí účastníků a budeme sdílet výsledky.\n\nAI nám šetří čas, ale finální slovo má stále člověk.',
+        '## AI jako asistent kurátora\n\nPoužíváme AI pro návrhy slotů a kontrolu témat proti duplicitám. Výsledky vždy projde kurátor. AI nám pomáhá s rutinními úkoly, ale finální rozhodnutí zůstává na lidech.\n\n## Organizace programu\n\nModely nám pomáhají seskupovat podobná témata a hledat mezery v programu. To nám umožňuje vytvořit vyvážený program, který pokrývá různé oblasti frontend vývoje.\n\nV talku o AI & DX ukazujeme i praktické workflow – najdeš ho v [archivu](/cs/archiv/prednasky/). Řečníci sdílí své zkušenosti s používáním AI nástrojů v praxi.\n\n## Experimentování a učení\n\nPlánujeme A/B testy agendy podle preferencí účastníků a budeme sdílet výsledky. Chceme zjistit, jak různé formáty a organizace programu ovlivňují spokojenost účastníků.\n\nAI nám šetří čas, ale finální slovo má stále člověk. Kombinace AI a lidského úsudku je klíčem k úspěchu.',
       authorId: 'sp-18',
       date: '2025-06-01',
     },
@@ -267,7 +267,7 @@ export const frontKonData: FrontKonData = {
       title: l('Bezpečnost supply chain', 'Supply chain security'),
       perex: l('Na co si dát pozor.', 'What to watch for.'),
       content:
-        '## Supply chain pod kontrolou\n\nAuditujeme závislosti, podepisujeme balíčky a hlídáme SRI. V CI běží SBOM kontroly a sken vulnerabilit.\n\nSdílíme checklist i na workshopu Security pro FE a v talku v [archivu](/cs/archiv/prednasky/).\n\nDo příští sezóny chceme přidat automatické blokování riskantních verzí a lepší alerting.\n\nZajímá tě téma? Přihlas se na náš security roundtable.\n\nBezpečnost je týmová disciplína – dělíme odpovědnost mezi FE, DevOps a security.',
+        '## Supply chain pod kontrolou\n\nAuditujeme závislosti, podepisujeme balíčky a hlídáme SRI. V CI běží SBOM kontroly a sken vulnerabilit. Bezpečnost závislostí je kritická část moderního vývoje a nelze ji podceňovat.\n\n## Automatizace bezpečnosti\n\nSdílíme checklist i na workshopu Security pro FE a v talku v [archivu](/cs/archiv/prednasky/). Praktické příklady a nástroje pomáhají týmům implementovat podobné procesy ve svých projektech.\n\nDo příští sezóny chceme přidat automatické blokování riskantních verzí a lepší alerting. Cílem je minimalizovat riziko a rychle reagovat na bezpečnostní hrozby.\n\n## Komunita a sdílení\n\nZajímá tě téma? Přihlas se na náš security roundtable. Diskutujeme o nejnovějších trendech, sdílíme zkušenosti a učíme se jeden od druhého.\n\nBezpečnost je týmová disciplína – dělíme odpovědnost mezi FE, DevOps a security. Spolupráce napříč týmy je klíčem k úspěchu.',
       authorId: 'sp-20',
       date: '2025-06-18',
     },
@@ -276,7 +276,7 @@ export const frontKonData: FrontKonData = {
       title: l('Organizační tým 2026', 'Organizing team 2026'),
       perex: l('Kdo stojí za FrontKonem.', 'Meet the crew behind FrontKon.'),
       content:
-        '## Lidé za FrontKonem\n\nTým se rozrostl o nové role pro content, komunitu a DX. Každý z nás má konkrétní fokus.\n\nV zákulisí ladíme produkční procesy, aby stage běžely plynule a stream měl kvalitu.\n\nNa webu jsme aktualizovali sekci tým – podívej se do [tým](/cs/tym/).\n\nMáme otevřenou výzvu pro dobrovolníky – ozvi se, pokud chceš pomoci s dalšími ročníky.\n\nDíky partnerům a komunitě můžeme posouvat konferenci dál.',
+        '## Lidé za FrontKonem\n\nTým se rozrostl o nové role pro content, komunitu a DX. Každý z nás má konkrétní fokus a přispívá k úspěchu konference svým způsobem. Společně vytváříme událost, která má smysl a přináší hodnotu komunitě.\n\n## Produkční procesy\n\nV zákulisí ladíme produkční procesy, aby stage běžely plynule a stream měl kvalitu. Každý detail má svůj význam – od technického nastavení až po komunikaci s řečníky.\n\nNa webu jsme aktualizovali sekci tým – podívej se do [tým](/cs/tym/). Chceme být transparentní a ukázat, kdo stojí za FrontKonem.\n\n## Zapoj se\n\nMáme otevřenou výzvu pro dobrovolníky – ozvi se, pokud chceš pomoci s dalšími ročníky. Každá pomoc je vítaná a pomáhá nám vytvářet lepší konferenci.\n\nDíky partnerům a komunitě můžeme posouvat konferenci dál. Bez podpory by FrontKon nebyl možný.',
       authorId: 'sp-02',
       date: '2025-07-02',
     },
