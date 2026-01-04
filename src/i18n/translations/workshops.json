@@ -16,7 +16,49 @@
     "program": "Program workshopu",
     "buyTicket": "Koupit vstupenku",
     "persons": "osob",
-    "min": "min"
+    "min": "min",
+    "heroTitle": "FrontKon představuje workshopy",
+    "heroPlaceholder": "[Placeholder pro fotky - lektoři workshopů a prostory O2 Universum]",
+    "whyTitle": "Proč workshopy?",
+    "whyItems": [
+      {
+        "title": "Praktické zkušenosti",
+        "desc": "Hands-on učení v menších skupinách (30–45 účastníků). Pracuješ na konkrétních projektech a příkladech, ne jen posloucháš."
+      },
+      {
+        "title": "Zkušení lektoři",
+        "desc": "Workshopy vedou odborníci z praxe, kteří ti předají reálné know-how a odpoví na všechny dotazy."
+      },
+      {
+        "title": "Do hloubky",
+        "desc": "Máš čas prozkoumat téma detailně, vyzkoušet si různé přístupy a získat praktické dovednosti, které okamžitě využiješ."
+      }
+    ],
+    "listTitle": "Seznam workshopů",
+    "listDescription": "Kompletní seznam workshopů najdete níže. Každý workshop má omezenou kapacitu, proto doporučujeme včasnou registraci.",
+    "faqTitle": "FAQ k organizaci workshopů",
+    "faq": [
+      {
+        "q": "Jak se přihlásit na workshop?",
+        "a": "Registrace probíhá společně s nákupem vstupenky na konferenci. Při nákupu si můžete vybrat workshop. Kapacita je omezená, proto doporučujeme včasnou registraci."
+      },
+      {
+        "q": "Je workshop zahrnutý v ceně vstupenky?",
+        "a": "Ne, workshopy jsou placené samostatně. Cena je uvedená u každého workshopu a zahrnuje účast, materiály a občerstvení."
+      },
+      {
+        "q": "Co si mám vzít s sebou?",
+        "a": "Doporučujeme vlastní notebook. Konkrétní požadavky na předinstalované nástroje obdržíte e‑mailem před workshopem."
+      },
+      {
+        "q": "Mohu se přihlásit na více workshopů?",
+        "a": "Ano, pokud se jejich časy nepřekrývají. Při registraci si můžete vybrat kombinaci workshopů."
+      },
+      {
+        "q": "Jak probíhá workshop a jaké jsou prostory?",
+        "a": "Workshopy probíhají v moderních prostorách O2 Universum s vybavenými učebnami, projektory, stabilním Wi‑Fi a zásuvkami pro notebooky. Každý workshop začíná úvodem lektora, následuje praktická část s hands-on cvičeními a na závěr je prostor pro dotazy. Workshopy jsou navržené interaktivně, můžete pracovat na vlastních projektech nebo příkladech od lektora."
+      }
+    ]
   },
   "en": {
     "title": "Workshops",
@@ -35,7 +77,49 @@
     "program": "Workshop program",
     "buyTicket": "Buy ticket",
     "persons": "persons",
-    "min": "min"
+    "min": "min",
+    "heroTitle": "FrontKon introduces workshops",
+    "heroPlaceholder": "[Placeholder for photos - workshop instructors and O2 Universum facilities]",
+    "whyTitle": "Why workshops?",
+    "whyItems": [
+      {
+        "title": "Hands-on experience",
+        "desc": "Practical learning in smaller groups (30–45 participants). You work on real projects and examples, not just listen."
+      },
+      {
+        "title": "Expert instructors",
+        "desc": "Workshops are led by industry experts who share real-world know-how and answer all your questions."
+      },
+      {
+        "title": "Deep dive",
+        "desc": "You have time to explore topics in detail, try different approaches, and gain practical skills you can use immediately."
+      }
+    ],
+    "listTitle": "Workshop list",
+    "listDescription": "You can find the complete list of workshops below. Each workshop has limited capacity, so we recommend early registration.",
+    "faqTitle": "FAQ about workshop organization",
+    "faq": [
+      {
+        "q": "How do I register for a workshop?",
+        "a": "Registration takes place together with purchasing a conference ticket. When purchasing, you can select a workshop. Capacity is limited, so we recommend early registration."
+      },
+      {
+        "q": "Is the workshop included in the ticket price?",
+        "a": "No, workshops are paid separately. The price is listed for each workshop and includes participation, materials, and refreshments."
+      },
+      {
+        "q": "What should I bring?",
+        "a": "We recommend bringing your own laptop. Specific requirements for pre-installed tools will be sent by email before the workshop."
+      },
+      {
+        "q": "Can I register for multiple workshops?",
+        "a": "Yes, if their times don't overlap. During registration, you can select a combination of workshops."
+      },
+      {
+        "q": "How does a workshop run and what are the facilities?",
+        "a": "Workshops take place in modern facilities at O2 Universum with equipped classrooms, projectors, stable Wi‑Fi, and power outlets for laptops. Each workshop begins with an introduction by the instructor, followed by a practical part with hands-on exercises, and ends with time for questions. Workshops are designed interactively - you can work on your own projects or examples provided by the instructor."
+      }
+    ]
   }
 }
 

@@ -37,6 +37,7 @@ if (!workshop) {
 
 const speaker = frontKonData.speakers.find((s) => s.id === workshop.speakerId);
 const t = getTranslationObject(lang, 'workshops');
+const tickets = getTranslationObject(lang, 'homepage', 'tickets');
 ---
 
 <BaseLayout title={getText(workshop.title, lang)} lang={lang}>
@@ -44,31 +45,67 @@ const t = getTranslationObject(lang, 'workshops');
     <a class="back-link" href={pref(`/${lang}/workshopy/`)}>{t.backToWorkshops}</a>
     <div class="detail-header">
       <h1>{getText(workshop.title, lang)}</h1>
+    </div>
+    <div style="display: grid; grid-template-columns: 300px 1fr 300px; gap: 2rem; align-items: start;">
+      {/* Levá strana - cenový boxík + CTA */}
+      <div style="position: sticky; top: 2rem;">
+        <div class="card">
+          <p class="list-meta">{t.date} {workshop.date}</p>
+          <p class="list-meta">{t.time} {workshop.time}</p>
+          <p class="list-meta">{t.duration} {workshop.duration} {t.min}</p>
+          <p class="list-meta">{t.capacity} {workshop.capacity} {t.persons}</p>
+          <p class="list-title" style="margin-top: 1rem; margin-bottom: 1rem;">{t.price} {workshop.price}</p>
+          <a class="btn-primary" href={tickets.buyUrl} style="width: 100%; text-align: center; display: block;">{t.buyTicket}</a>
+        </div>
+      </div>
+
+      {/* Střed - obsah workshopu */}
+      <div class="detail-content">
+        <div class="detail-description">
+          <h3>{t.annotation}</h3>
+          <p>{getText(workshop.description, lang)}</p>
+          <h3>{t.audience}</h3>
+          <p>{getText(workshop.audience, lang)}</p>
+          <h3>{t.program}</h3>
+          <p>{getText(workshop.program, lang)}</p>
+        </div>
+      </div>
+
+      {/* Pravá strana - medailonek řečníka */}
       {speaker && (
-        <p class="detail-speaker">
-          {speaker.name} · <span class="detail-company">{speaker.company}</span>
-        </p>
+        <div style="position: sticky; top: 2rem;">
+          <div class="card">
+            <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+              <div class="speaker-avatar-large">
+                <div class="avatar-placeholder-image"></div>
+              </div>
+              <h3>{speaker.name}</h3>
+              <p class="modal-company">{speaker.company}</p>
+              <p class="modal-description">{getText(speaker.bio, lang)}</p>
+            </a>
+            {speaker.links && (
+              <div class="modal-links" style="margin-top: 1rem;">
+                {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
+                {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
+                {speaker.links.web && <a href={speaker.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
+                {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
-    <div class="detail-content">
-      <div class="card">
-        <p class="list-meta">{t.date} {workshop.date}</p>
-        <p class="list-meta">{t.time} {workshop.time}</p>
-        <p class="list-meta">{t.duration} {workshop.duration} {t.min}</p>
-        <p class="list-meta">{t.capacity} {workshop.capacity} {t.persons}</p>
-        <p class="list-title">{t.price} {workshop.price}</p>
-      </div>
-      <div class="detail-description">
-        <h3>{t.annotation}</h3>
-        <p>{getText(workshop.description, lang)}</p>
-        <h3>{t.audience}</h3>
-        <p>{getText(workshop.audience, lang)}</p>
-        <h3>{t.program}</h3>
-        <p>{getText(workshop.program, lang)}</p>
-      </div>
-      <div class="cta-row" style="margin-top: 2rem;">
-        <a class="btn-secondary" href={getTranslationObject(lang, 'homepage', 'tickets').buyUrl}>{t.buyTicket}</a>
-      </div>
-    </div>
   </div>
+
+  <style>
+    @media (max-width: 1024px) {
+      .detail-page > div:last-child {
+        grid-template-columns: 1fr;
+      }
+      .detail-page > div:last-child > div:first-child,
+      .detail-page > div:last-child > div:last-child {
+        position: static !important;
+      }
+    }
+  </style>
 </BaseLayout>
