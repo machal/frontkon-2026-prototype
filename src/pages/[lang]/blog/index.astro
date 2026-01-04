@@ -1,1 +1,46 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText } from '@/utils/content';
+import { getTranslationObject } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
 
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+const blogPosts = frontKonData.blogPosts.sort((a, b) => b.date.localeCompare(a.date));
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+const t = getTranslationObject(lang, 'blog');
+---
+
+<BaseLayout title={t.title} lang={lang}>
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.subtitle}</p>
+      <h2>{t.title}</h2>
+      <p class="subtitle">{t.description}</p>
+    </div>
+    <div class="grid">
+      {blogPosts.map((post) => {
+        const author = frontKonData.speakers.find((s) => s.id === post.authorId);
+        return (
+          <a class="card card-link" href={pref(`/${lang}/blog/${post.id}/`)}>
+            <h3>{getText(post.title, lang)}</h3>
+            <p class="modal-description">{getText(post.perex, lang)}</p>
+            <p class="list-meta">{post.date} · {author?.name}</p>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

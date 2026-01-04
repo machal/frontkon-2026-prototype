@@ -1,1 +1,74 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText } from '@/utils/content';
+import { getTranslation, getTranslationObject } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
 
+const { lang: langParam, id } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+if (!langParam || !languages.includes(langParam as Locale)) {
+  return Astro.redirect(`/${defaultLanguage}/`);
+}
+
+const workshop = frontKonData.workshops.find((w) => w.id === id);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+export function getStaticPaths() {
+  const paths: Array<{ params: { lang: string; id: string } }> = [];
+  languages.forEach((lang) => {
+    frontKonData.workshops.forEach((workshop) => {
+      paths.push({
+        params: { lang, id: workshop.id },
+      });
+    });
+  });
+  return paths;
+}
+
+if (!workshop) {
+  throw Astro.redirect(`/${lang}/workshopy/`);
+}
+
+const speaker = frontKonData.speakers.find((s) => s.id === workshop.speakerId);
+const t = getTranslationObject(lang, 'workshops');
+---
+
+<BaseLayout title={getText(workshop.title, lang)} lang={lang}>
+  <div class="detail-page">
+    <a class="back-link" href={pref(`/${lang}/workshopy/`)}>{t.backToWorkshops}</a>
+    <div class="detail-header">
+      <h1>{getText(workshop.title, lang)}</h1>
+      {speaker && (
+        <p class="detail-speaker">
+          {speaker.name} · <span class="detail-company">{speaker.company}</span>
+        </p>
+      )}
+    </div>
+    <div class="detail-content">
+      <div class="card">
+        <p class="list-meta">{t.date} {workshop.date}</p>
+        <p class="list-meta">{t.time} {workshop.time}</p>
+        <p class="list-meta">{t.duration} {workshop.duration} {t.min}</p>
+        <p class="list-meta">{t.capacity} {workshop.capacity} {t.persons}</p>
+        <p class="list-title">{t.price} {workshop.price}</p>
+      </div>
+      <div class="detail-description">
+        <h3>{t.annotation}</h3>
+        <p>{getText(workshop.description, lang)}</p>
+        <h3>{t.audience}</h3>
+        <p>{getText(workshop.audience, lang)}</p>
+        <h3>{t.program}</h3>
+        <p>{getText(workshop.program, lang)}</p>
+      </div>
+      <div class="cta-row" style="margin-top: 2rem;">
+        <a class="nav-button active" href={getTranslationObject(lang, 'homepage', 'tickets').buyUrl}>{t.buyTicket}</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,1 +1,285 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { frontKonData } from '@/data/frontkon-data';
+import type { Locale } from '@/data/types';
+import { getText } from '@/utils/content';
+import { getTranslation, getTranslationObject } from '@/utils/i18n';
+import { languages, defaultLanguage } from '@/i18n/config';
 
+export function getStaticPaths() {
+  return languages.map((lang) => ({
+    params: { lang },
+  }));
+}
+
+const { lang: langParam } = Astro.params;
+const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
+  ? (langParam as Locale) 
+  : defaultLanguage;
+
+const year2026 = frontKonData.years.find((y) => y.id === '2026');
+const talks2026 = frontKonData.talks.filter((t) => t.yearId === '2026');
+const workshops2026 = frontKonData.workshops.filter((w) => w.yearId === '2026');
+const topWorkshops = workshops2026.slice(0, 3);
+const realSpeakers2026 = ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25'];
+const speakersHighlight = realSpeakers2026.map(id => frontKonData.speakers.find(s => s.id === id)).filter((s): s is NonNullable<typeof s> => s !== undefined);
+const base = import.meta.env.BASE_URL || '/';
+const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+const t = {
+  hero: getTranslationObject(lang, 'homepage', 'hero'),
+  speakers: getTranslationObject(lang, 'homepage', 'speakers'),
+  tickets: getTranslationObject(lang, 'homepage', 'tickets'),
+  features: getTranslationObject(lang, 'homepage', 'features'),
+  workshops: getTranslationObject(lang, 'homepage', 'workshops'),
+  faq: getTranslationObject(lang, 'homepage', 'faq'),
+  archive: getTranslationObject(lang, 'homepage', 'archive'),
+  social: getTranslationObject(lang, 'homepage', 'social'),
+  partners: getTranslationObject(lang, 'homepage', 'partners'),
+  newsletter: getTranslationObject(lang, 'homepage', 'newsletter'),
+};
+
+const faq = t.faq.items || [];
+const features = t.features.items || [];
+const socials = t.social.items || [];
+const partners = [
+  { name: 'CDN77', url: 'https://www.cdn77.com/', type: 'main' },
+  { name: 'Alma Career', url: 'https://magazin.almacareer.com/cz', type: 'partner' },
+  { name: 'GreenCode', url: 'https://greencode.cz/', type: 'partner' },
+  { name: 'Heureka Group', url: 'https://heureka.group/', type: 'partner' },
+  { name: 'Livesport', url: 'https://livesport.cz/', type: 'partner' },
+  { name: 'Make', url: 'https://make.com/', type: 'partner' },
+  { name: 'Mews', url: 'https://mews.com/', type: 'partner' },
+  { name: 'Outreach', url: 'https://outreach.io', type: 'partner' },
+  { name: 'Superkoders', url: 'https://superkoders.com/', type: 'afterparty' },
+];
+---
+
+<BaseLayout title="FrontKon 2026" lang={lang}>
+  <section class="hero-wireframe">
+    <div class="hero-content">
+      <p class="eyebrow">{t.hero.date} · {t.hero.location}</p>
+      <h2 class="hero-title">{t.hero.title}</h2>
+      <p class="hero-tagline">{t.hero.tagline}</p>
+      <div class="cta-row" style="margin-top: 1rem;">
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.hero.ticketButton}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="margin-top: 2rem;">
+    <div class="section-header">
+      <p class="hero-meta" style="margin-top: 1rem;"><strong>{t.hero.whyBuy}</strong> {t.hero.whyBuyDesc}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="hero-meta">{t.hero.meta}</p>
+      <p class="hero-meta">{t.hero.meta2}</p>
+      <p class="hero-meta">{t.hero.meta3}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.speakers.eyebrow}</p>
+      <h2>{t.speakers.title}</h2>
+      <p class="subtitle">{t.speakers.subtitle}</p>
+    </div>
+    <div class="grid">
+      {speakersHighlight.map((speaker) => (
+        <div class="card">
+          <a class="card-link" href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+            <div class="speaker-avatar-large">
+              <div class="avatar-placeholder-image"></div>
+            </div>
+            <h3>{speaker.name}</h3>
+            <p class="modal-company">{speaker.company}</p>
+            <p class="modal-description">{getText(speaker.bio, lang)}</p>
+          </a>
+          {speaker.links && (
+            <div class="modal-links" style="margin-top: 1rem;">
+              {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`} target="_blank" rel="noopener noreferrer">Twitter</a>}
+              {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>}
+              {speaker.links.web && <a href={speaker.links.web} target="_blank" rel="noopener noreferrer">Web</a>}
+              {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <div class="cta-row" style="margin-top:1rem;">
+      <a class="nav-button" href={pref(`/${lang}/prednasky/`)}>{t.speakers.fullProgram}</a>
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+      <p>{t.speakers.moreComing}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.archive.eyebrow}</p>
+      <h2>{t.archive.title}</h2>
+      <p class="subtitle">{t.archive.subtitle}</p>
+    </div>
+    <div style="max-width: 800px; margin: 0 auto 2rem;">
+      <div class="video-container" style="margin-bottom: 1rem;">
+        <iframe
+          width="100%"
+          height="450"
+          src="https://www.youtube.com/embed/w7IUpDYMZgk"
+          title="FrontKon 2025 Recap"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="border: 1px solid rgba(0, 0, 34, 0.2);"
+        ></iframe>
+      </div>
+    </div>
+    <div class="grid" style="max-width: 800px; margin: 0 auto;">
+      <div class="card">
+        <p class="list-title">{t.archive.photoGallery}</p>
+        <p class="modal-description">{t.archive.photoDescription}</p>
+        <a class="nav-button" href={pref(`/${lang}/archiv/`)}>{t.archive.view}</a>
+      </div>
+      <div class="card">
+        <p class="list-title">{t.archive.watchVideos}</p>
+        <p class="modal-description">{lang === 'cs' ? 'Podívej se na všechny záznamy z minulých ročníků na našem YouTube kanálu.' : 'Watch all recordings from previous years on our YouTube channel.'}</p>
+        <a class="nav-button" href={t.archive.youtubeUrl} target="_blank" rel="noopener noreferrer">{t.archive.watchVideos}</a>
+      </div>
+    </div>
+  </section>
+
+  <section id={lang === 'cs' ? 'vstupenky' : 'tickets'} class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.tickets.eyebrow}</p>
+      <h2>{t.tickets.title}</h2>
+      <p class="subtitle">{t.tickets.subtitle}</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>{t.tickets.earlyBird.title}</h3>
+        <p class="modal-description">{t.tickets.earlyBird.description}</p>
+        <p class="list-title">{t.tickets.earlyBird.price}</p>
+        <a class="btn-primary" href={t.tickets.buyUrl}>{t.tickets.earlyBird.button}</a>
+      </div>
+      <div class="card">
+        <h3>{t.tickets.standard.title}</h3>
+        <p class="modal-description">{t.tickets.standard.description}</p>
+        <p class="list-title">{t.tickets.standard.price}</p>
+        <a class="btn-secondary" href={t.tickets.buyUrl}>{t.tickets.standard.button}</a>
+      </div>
+      <div class="card">
+        <h3>{t.tickets.student.title}</h3>
+        <p class="modal-description">{t.tickets.student.description}</p>
+        <p class="list-title">{t.tickets.student.price}</p>
+        <a class="btn-secondary" href={t.tickets.buyUrl}>{t.tickets.student.button}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.features.eyebrow}</p>
+      <h2>{t.features.title}</h2>
+      <p class="subtitle">{t.features.subtitle}</p>
+    </div>
+    <div class="grid">
+      {features.map((item: any) => (
+        <div class="card">
+          <h3>{item.title}</h3>
+          <p class="modal-description">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id={lang === 'cs' ? 'workshopy' : 'workshops'} class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.workshops.eyebrow}</p>
+      <h2>{lang === 'cs' ? 'Letošní novinka: workshopy' : 'This year\'s new: workshops'}</h2>
+      <p class="subtitle">{t.workshops.subtitle}</p>
+    </div>
+    <div class="grid">
+      {topWorkshops.map((ws) => (
+        <a class="card card-link" href={pref(`/${lang}/workshopy/${ws.id}/`)}>
+          <h3>{getText(ws.title, lang)}</h3>
+          <p class="modal-description">{getText(ws.description, lang)}</p>
+          <p class="list-meta">{ws.duration} {getTranslation(lang, 'workshops', 'min')} · {getTranslation(lang, 'workshops', 'capacityLabel')} {ws.capacity} · {ws.price}</p>
+        </a>
+      ))}
+    </div>
+    <div class="cta-row" style="margin-top:1rem;">
+      <a class="nav-button" href={pref(`/${lang}/workshopy/`)}>{t.workshops.more}</a>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.faq.eyebrow}</p>
+      <h2>{t.faq.title}</h2>
+    </div>
+    <div class="accordion">
+      {faq.map((item: any) => (
+        <details class="accordion-item">
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.social.eyebrow}</p>
+      <h2>{t.social.title}</h2>
+    </div>
+    <div class="cta-row">
+      {socials.map((s: any) => (
+        <a class="nav-button" href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <p class="eyebrow">{t.partners.eyebrow}</p>
+      <h2>{t.partners.title}</h2>
+      <p class="subtitle">{t.partners.subtitle}</p>
+    </div>
+    <div class="partners-container">
+      {partners.filter((p: any) => p.type === 'main').map((partner: any) => (
+        <div class="partner-main-wrapper">
+          <a class="card partner-card partner-main" href={partner.url} target="_blank" rel="noopener noreferrer">
+            <p class="list-title">{partner.name}</p>
+            <p class="modal-description">{lang === 'cs' ? 'Hlavní partner' : 'Main partner'}</p>
+          </a>
+        </div>
+      ))}
+      <div class="partners-grid">
+        {partners.filter((p: any) => p.type !== 'main').map((partner: any) => (
+          <a class="card partner-card" href={partner.url} target="_blank" rel="noopener noreferrer">
+            <p class="list-title">{partner.name}</p>
+            <p class="modal-description">{partner.type === 'afterparty' ? (lang === 'cs' ? 'Partner afterparty' : 'Afterparty partner') : (lang === 'cs' ? 'Partner' : 'Partner')}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+    <div class="cta-row" style="margin-top: 1rem;">
+      <a class="nav-button" href="mailto:tomas.hejc@frontendisti.cz?subject=Chci%20být%20partnerem%20Frontkonu%202026">{t.partners.becomePartner}</a>
+    </div>
+  </section>
+
+  <section class="section newsletter-section">
+    <div class="hero-panel card">
+      <p class="eyebrow">{t.newsletter.eyebrow}</p>
+      <h3>{t.newsletter.title}</h3>
+      <p class="modal-description">{t.newsletter.description}</p>
+      <form class="newsletter-form" action="https://www.frontkon.cz/" method="post">
+        <input class="newsletter-input" type="email" placeholder={t.newsletter.placeholder} required />
+        <button class="btn-primary" type="submit">{t.newsletter.button}</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
