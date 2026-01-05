@@ -2,14 +2,20 @@
   "cs": {
     "backToArchive": "← Zpět",
     "currentTalk": "Aktuální přednáška",
-    "previousTalks": "Minulé přednášky",
-    "bioDescription": "Přináší praktické příklady z produkčních projektů a sdílí nástroje, které používá v týmu."
+    "previousTalks": "Dřívější přednášky na FrontKonu",
+    "bioDescription": "Přináší praktické příklady z produkčních projektů a sdílí nástroje, které používá v týmu.",
+    "currentYearSpeaker": "Řečník aktuálního ročníku",
+    "pastYearSpeaker": "Řečník dřívějších ročníků",
+    "talkInPreparation": "Pracujeme na přípravě tématu přednášky"
   },
   "en": {
     "backToArchive": "← Back",
     "currentTalk": "Current talk",
-    "previousTalks": "Previous talks",
-    "bioDescription": "Brings hands-on lessons from production projects and shares tools used in the team."
+    "previousTalks": "Previous talks at FrontKon",
+    "bioDescription": "Brings hands-on lessons from production projects and shares tools used in the team.",
+    "currentYearSpeaker": "Speaker of current year",
+    "pastYearSpeaker": "Speaker of previous years",
+    "talkInPreparation": "We are working on preparing the talk topic"
   }
 }
 

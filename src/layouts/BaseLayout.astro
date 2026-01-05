@@ -9,9 +9,10 @@ interface Props {
   title: string;
   description?: string;
   lang?: Locale;
+  activeNavItem?: string; // 'program' nebo 'archive' pro zvýraznění v menu
 }
 
-const { title, description = '', lang = 'cs' } = Astro.props as Props;
+const { title, description = '', lang = 'cs', activeNavItem } = Astro.props as Props;
 const base = import.meta.env.BASE_URL || '/';
 const currentPath = Astro.url?.pathname ?? '/';
 const otherLang: Locale = lang === 'cs' ? 'en' : 'cs';
@@ -45,12 +46,47 @@ const navLinks = [
         <a class="logo-link" href={`${base.replace(/\/$/, '')}${withLangPrefix('/', lang)}`}>
           <h1>FrontKon</h1>
         </a>
-        <p class="subtitle">{lang === 'cs' ? 'Frontend konference' : 'Frontend conference'}</p>
+        <p class="subtitle">{lang === 'cs' ? 'Komunitní frontend konference' : 'Prague\'s Frontend Konference'}</p>
       </header>
 
       <nav class="nav nav-spread">
         {navLinks.map((item) => {
-          const isActive = currentPath.startsWith(item.href);
+          const homepageHref = withLangPrefix('/', lang);
+          
+          // Odstranit base z currentPath
+          let currentPathNormalized = currentPath;
+          if (base !== '/' && currentPath.startsWith(base)) {
+            currentPathNormalized = currentPath.slice(base.length);
+          }
+          // Normalizovat: zajistit začátek s / a odstranit trailing slash
+          if (!currentPathNormalized.startsWith('/')) {
+            currentPathNormalized = '/' + currentPathNormalized;
+          }
+          currentPathNormalized = currentPathNormalized.replace(/\/$/, '') || '/';
+          
+          // Normalizovat item href (odstranit trailing slash)
+          const itemHrefNormalized = item.href.replace(/\/$/, '') || '/';
+          const homepageHrefNormalized = homepageHref.replace(/\/$/, '') || '/';
+          
+          // Zjistit, jestli je to homepage
+          const isHomepage = itemHrefNormalized === homepageHrefNormalized;
+          
+          // Určit, jestli je položka aktivní
+          let isActive = false;
+          if (isHomepage) {
+            // Pro homepage: přesná shoda nebo activeNavItem === 'homepage'
+            isActive = currentPathNormalized === itemHrefNormalized || 
+                      currentPathNormalized === '/' || 
+                      activeNavItem === 'homepage';
+          } else {
+            // Pro ostatní stránky: zkontrolovat, jestli currentPath začíná item.href
+            // Musíme také zkontrolovat activeNavItem pro program/archive
+            isActive = currentPathNormalized.startsWith(itemHrefNormalized + '/') ||
+                      currentPathNormalized === itemHrefNormalized ||
+                      (activeNavItem === 'program' && item.href === withLangPrefix('/prednasky/', lang)) ||
+                      (activeNavItem === 'archive' && item.href === withLangPrefix('/archiv/', lang));
+          }
+          
           return (
             <a class={`nav-button ${isActive ? 'active' : ''}`} href={`${base.replace(/\/$/, '')}${item.href}`}>
               {item.label}

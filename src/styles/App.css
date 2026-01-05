@@ -649,6 +649,7 @@ body {
   margin-bottom: 1rem;
   font-family: 'League Spartan', sans-serif;
   letter-spacing: -0.02em;
+  line-height: 0.9;
 }
 
 .detail-badge {

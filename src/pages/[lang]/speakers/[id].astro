@@ -4,8 +4,9 @@ import { frontKonData } from '@/data/frontkon-data';
 import type { Locale } from '@/data/types';
 import { getText, mapTopics } from '@/utils/content';
 import { formatStage } from '@/utils/format';
-import { getTranslation } from '@/utils/i18n';
+import { getTranslation, getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
+import TalkCard from '@/components/TalkCard.astro';
 
 const { lang: langParam, id } = Astro.params;
 const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
@@ -37,54 +38,153 @@ if (!speaker) {
 }
 
 const talks = frontKonData.talks.filter((t) => t.speakerId === speaker.id);
-const currentTalk = talks.find((t) => t.yearId === '2026');
-const pastTalks = talks.filter((t) => t.yearId !== '2026');
+const currentYear = '2026';
+const currentYearSpeakers = ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25'];
+const isCurrentYearSpeaker = currentYearSpeakers.includes(speaker.id);
+const currentTalk = isCurrentYearSpeaker ? talks.find((t) => t.yearId === currentYear) : null;
+const pastTalks = talks.filter((t) => t.yearId !== currentYear);
+
+// Rozšířit bio na minimálně 500 znaků (pro demo účely, v produkci by mělo být v datech)
+const bioText = getText(speaker.bio, lang);
+const bioParts = bioText.split(/[.!?]\s+/);
+const firstSentence = bioParts[0] || bioText.split('.')[0] || '';
+const restOfBio = bioParts.length > 1 
+  ? bioParts.slice(1).join('. ') 
+  : bioText.substring(firstSentence.length + 1).trim();
+
+// Získat odkazy (max 3)
+const links = speaker.links || {};
+const availableLinks = [
+  links.web && { type: 'web', url: links.web, label: 'Web' },
+  links.twitter && { type: 'twitter', url: `https://twitter.com/${links.twitter.replace('@', '')}`, label: 'Twitter' },
+  links.github && { type: 'github', url: `https://github.com/${links.github}`, label: 'GitHub' },
+  links.linkedin && { type: 'linkedin', url: `https://www.linkedin.com/in/${links.linkedin}`, label: 'LinkedIn' },
+].filter(Boolean).slice(0, 3);
+
+const t = getTranslationObject(lang, 'speakers');
 ---
 
-<BaseLayout title={`${speaker.name} · FrontKon`} lang={lang}>
+<BaseLayout 
+  title={`${speaker.name} · FrontKon`} 
+  lang={lang}
+  activeNavItem={isCurrentYearSpeaker ? 'homepage' : 'archive'}
+>
   <div class="detail-page">
-    <a class="back-link" href={pref(`/${lang}/archiv/`)}>{getTranslation(lang, 'speakers', 'backToArchive')}</a>
-    <div class="detail-header">
-      <h1>{speaker.name}</h1>
-      <p class="detail-company">{speaker.company}</p>
-    </div>
-    <div class="detail-content">
-      <div class="detail-description">
-        <p>{getText(speaker.bio, lang)}</p>
-        <p>{getTranslation(lang, 'speakers', 'bioDescription')}</p>
-      </div>
-      {speaker.links && (
-        <div class="links-list" style="margin: 1rem 0;">
-          {speaker.links.twitter && <a href={`https://twitter.com/${speaker.links.twitter.replace('@', '')}`}>Twitter</a>}
-          {speaker.links.github && <a href={`https://github.com/${speaker.links.github}`}>GitHub</a>}
-          {speaker.links.web && <a href={speaker.links.web}>Web</a>}
-          {speaker.links.linkedin && <a href={`https://www.linkedin.com/in/${speaker.links.linkedin}`}>LinkedIn</a>}
-        </div>
-      )}
-      {currentTalk && (
+    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 3rem; align-items: start;">
+      {/* Levá strana - boxík s fotkou, jménem a odkazy */}
+      <div style="position: sticky; top: 2rem;">
         <div class="card">
-          <h3>{getTranslation(lang, 'speakers', 'currentTalk')}</h3>
-          <p class="list-title">{getText(currentTalk.title, lang)}</p>
-          <p class="list-meta">{currentTalk.yearId} · {formatStage(currentTalk.stage)} · {currentTalk.time}</p>
-          <p class="modal-description">{getText(currentTalk.description, lang)}</p>
-          <p class="list-tags">{mapTopics(frontKonData.topics, currentTalk.topicIds, lang).join(', ')}</p>
-        </div>
-      )}
-      {pastTalks.length > 0 && (
-        <div class="related-section">
-          <h2>{getTranslation(lang, 'speakers', 'previousTalks')}</h2>
-          <div class="list">
-            {pastTalks.map((talk) => (
-              <a class="card card-link" href={pref(`/${lang}/talks/${talk.id}/`)}>
-                <p class="list-title">{getText(talk.title, lang)}</p>
-                <p class="list-meta">{talk.yearId} · {formatStage(talk.stage)} · {talk.time}</p>
-              </a>
-            ))}
+          <div class="speaker-avatar-large" style="width: 100%; aspect-ratio: 1; margin-bottom: 1.5rem; border-radius: 0; background: rgba(0, 0, 34, 0.1);">
+            <div class="avatar-placeholder-image"></div>
           </div>
+          <h2 style="font-size: 32px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 0.5rem;">
+            {speaker.name}
+          </h2>
+          <p class="modal-company" style="margin-bottom: 1.5rem;">{speaker.company}</p>
+          
+          {/* Odkazy (max 3) */}
+          {availableLinks.length > 0 && (
+            <div class="modal-links" style="margin-top: 1rem; margin-bottom: 1.5rem;">
+              {availableLinks.map((link: any) => (
+                <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </div>
+
+      {/* Střed - medailonek a obsah */}
+      <div class="detail-content">
+        {/* Medailonek s rozšířeným bio */}
+        <div class="detail-description" style="margin-bottom: 2rem;">
+          <p style="font-size: 20px; line-height: 28px; color: rgb(0, 0, 34);">
+            <strong style="font-weight: 600;">{firstSentence}.</strong> {restOfBio}
+            {bioText.length < 500 && (
+              <span> {getTranslation(lang, 'speakers', 'bioDescription')}</span>
+            )}
+          </p>
+        </div>
+
+        {/* Status řečníka - malým caps lockem šedivě pod medailonek */}
+        <p style="font-size: 12px; color: rgba(0, 0, 34, 0.5); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3rem;">
+          {isCurrentYearSpeaker 
+            ? t.currentYearSpeaker
+            : t.pastYearSpeaker}
+        </p>
+
+        {/* Pokud je řečník aktuálního ročníku - název a anotace přednášky pod medailonkem */}
+        {isCurrentYearSpeaker && (
+          <>
+            {currentTalk ? (
+              <>
+                {/* H2 s názvem přednášky */}
+                <h2 style="font-size: 36px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 1rem;">
+                  {getText(currentTalk.title, lang)}
+                </h2>
+                
+                {/* Popis přednášky (1-2 odstavce) */}
+                <div style="margin-bottom: 2rem;">
+                  <p style="font-size: 20px; line-height: 28px; color: rgb(0, 0, 34); margin-bottom: 1rem;">
+                    {getText(currentTalk.description, lang)}
+                  </p>
+                </div>
+                
+                {/* Tagy s tématy */}
+                <div style="margin-bottom: 3rem;">
+                  <p class="list-tags" style="font-size: 16px; color: rgba(0, 0, 34, 0.8);">
+                    {mapTopics(frontKonData.topics, currentTalk.topicIds, lang).join(' · ')}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <p style="font-size: 20px; line-height: 28px; color: rgba(0, 0, 34, 0.7); margin-bottom: 3rem; font-style: italic;">
+                {t.talkInPreparation}
+              </p>
+            )}
+          </>
+        )}
+
+        {/* Sekce dřívějších přednášek */}
+        {pastTalks.length > 0 && (
+          <div class="related-section">
+            <h2 style="font-size: 36px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 2rem;">
+              {t.previousTalks}
+            </h2>
+            <div class="grid archive-talks-grid">
+              {pastTalks.map((talk) => {
+                const talkSpeaker = frontKonData.speakers.find((s) => s.id === talk.speakerId);
+                return (
+                  <TalkCard
+                    talk={talk}
+                    speaker={talkSpeaker}
+                    topics={frontKonData.topics}
+                    lang={lang}
+                    base={base}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   </div>
+
+  <style>
+    .speaker-avatar-large {
+      border-radius: 0;
+      border: 1px solid rgba(0, 0, 34, 0.2);
+      overflow: hidden;
+      background: rgba(0, 0, 34, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+      .detail-page > div:first-child {
+        grid-template-columns: 1fr;
+      }
+      .detail-page > div:first-child > div:first-child {
+        position: static !important;
+      }
+    }
+  </style>
 </BaseLayout>
-
-

@@ -1,7 +1,7 @@
 {
   "cs": {
     "nav": {
-      "home": "FrontKon 2026",
+      "home": "Homepage",
       "talks": "Přednášky",
       "workshops": "Workshopy",
       "blog": "Blog",
@@ -25,7 +25,7 @@
   },
   "en": {
     "nav": {
-      "home": "FrontKon 2026",
+      "home": "Homepage",
       "talks": "Talks",
       "workshops": "Workshops",
       "blog": "Blog",

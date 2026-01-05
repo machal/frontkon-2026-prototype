@@ -29,15 +29,34 @@ const archiveYears = frontKonData.years.filter((y) => {
 ---
 
 <BaseLayout title={t.title} lang={lang}>
-  <!-- Motivační blok -->
+  <!-- Hero obrázek placeholder -->
+  <section class="hero-wireframe" style="margin-bottom: 4rem;">
+    <div style="width: 100%; height: 400px; background: rgba(0, 0, 34, 0.1); border: 1px dashed rgba(0, 0, 34, 0.3); display: flex; align-items: center; justify-content: center;">
+      <p style="color: rgba(0, 0, 34, 0.5); font-size: 18px;">[Placeholder pro velkou fotku archivu]</p>
+    </div>
+  </section>
+
+  <!-- Tři boxíky s důvody -->
   <section class="section">
     <div class="section-header">
       <h2>{t.motivationTitle}</h2>
     </div>
-    <div style="max-width: 800px; margin: 0 auto;">
-      <div style="background: rgba(0, 0, 34, 0.05); border: 1px solid rgba(0, 0, 34, 0.2); padding: 3rem; text-align: center; color: rgba(0, 0, 34, 0.6);">
-        <p>{t.motivationText}</p>
+    <div class="grid features-grid">
+      <div class="card">
+        <h3>{t.reason1.title}</h3>
+        <p class="modal-description">{t.reason1.text}</p>
       </div>
+      <div class="card">
+        <h3>{t.reason2.title}</h3>
+        <p class="modal-description">{t.reason2.text}</p>
+      </div>
+      <div class="card">
+        <h3>{t.reason3.title}</h3>
+        <p class="modal-description">{t.reason3.text}</p>
+      </div>
+    </div>
+    <div style="max-width: 800px; margin: 2rem auto 0; text-align: center;">
+      <p style="color: rgba(0, 0, 34, 0.7); font-size: 20px;">{t.motivationText}</p>
     </div>
   </section>
 

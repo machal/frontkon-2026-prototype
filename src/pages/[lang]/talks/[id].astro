@@ -4,8 +4,9 @@ import { frontKonData } from '@/data/frontkon-data';
 import type { Locale } from '@/data/types';
 import { getText, mapTopics } from '@/utils/content';
 import { formatStage } from '@/utils/format';
-import { getTranslation } from '@/utils/i18n';
+import { getTranslation, getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
+import TalkCard from '@/components/TalkCard.astro';
 
 const { lang: langParam, id } = Astro.params;
 const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
@@ -38,47 +39,143 @@ if (!talk) {
 
 const speaker = frontKonData.speakers.find((s) => s.id === talk.speakerId);
 const related = frontKonData.talks.filter((t) => t.speakerId === talk.speakerId && t.id !== talk.id).slice(0, 3);
+const isCurrentYear = talk.yearId === '2026';
+
+// Získat odkazy řečníka (max 3)
+const links = speaker?.links || {};
+const availableLinks = [
+  links.web && { type: 'web', url: links.web, label: 'Web' },
+  links.twitter && { type: 'twitter', url: `https://twitter.com/${links.twitter.replace('@', '')}`, label: 'Twitter' },
+  links.github && { type: 'github', url: `https://github.com/${links.github}`, label: 'GitHub' },
+  links.linkedin && { type: 'linkedin', url: `https://www.linkedin.com/in/${links.linkedin}`, label: 'LinkedIn' },
+].filter(Boolean).slice(0, 3);
+
+const t = getTranslationObject(lang, 'talks');
 ---
 
-<BaseLayout title={getText(talk.title, lang)} lang={lang}>
+<BaseLayout 
+  title={getText(talk.title, lang)} 
+  lang={lang}
+  activeNavItem={isCurrentYear ? 'program' : 'archive'}
+>
   <div class="detail-page">
-    <a class="back-link" href={pref(`/${lang}/archiv/`)}>{getTranslation(lang, 'talks', 'backToArchive')}</a>
-    <div class="detail-header">
-      <h1>{getText(talk.title, lang)}</h1>
-      <p class="detail-speaker">
-        {speaker?.name} · <span class="detail-company">{speaker?.company}</span>
-      </p>
-      <p class="list-meta">{talk.yearId} · {formatStage(talk.stage)} · {talk.time}</p>
-    </div>
-    <div class="video-container">
-      <div class="video-placeholder">
-        <div class="video-placeholder-content">
-          <div class="play-icon">▶</div>
-          <p>{getTranslation(lang, 'talks', 'videoComingSoon')} {talk.youtubeId}</p>
+    <div style="display: grid; grid-template-columns: 350px 1fr; gap: 3rem; align-items: start;">
+      {/* Levá strana - boční profil řečníka */}
+      {speaker && (
+        <div style="position: sticky; top: 2rem;">
+          <div class="card">
+            <div class="speaker-avatar-large" style="width: 100%; aspect-ratio: 1; margin-bottom: 1.5rem; border-radius: 0; background: rgba(0, 0, 34, 0.1);">
+              <div class="avatar-placeholder-image"></div>
+            </div>
+            <h2 style="font-size: 32px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 0.5rem;">
+              <a href={pref(`/${lang}/speakers/${speaker.id}/`)} style="text-decoration: none; color: inherit;">
+                {speaker.name}
+              </a>
+            </h2>
+            <p class="modal-company" style="margin-bottom: 1.5rem;">{speaker.company}</p>
+            
+            {/* Odkazy (max 3) */}
+            {availableLinks.length > 0 && (
+              <div class="modal-links" style="margin-top: 1rem;">
+                {availableLinks.map((link: any) => (
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="detail-content">
-      <div class="detail-description">
-        <p>{getText(talk.description, lang)}</p>
-        <p>{getTranslation(lang, 'talks', 'descriptionExtra')}</p>
-      </div>
-      <p class="list-tags">{mapTopics(frontKonData.topics, talk.topicIds, lang).join(', ')}</p>
-    </div>
-    {related.length > 0 && (
-      <div class="related-section">
-        <h2>{getTranslation(lang, 'talks', 'relatedTalks')}</h2>
-        <div class="list">
-          {related.map((item) => (
-            <a class="card card-link" href={pref(`/${lang}/talks/${item.id}/`)}>
-              <p class="list-title">{getText(item.title, lang)}</p>
-              <p class="list-meta">{item.yearId} · {formatStage(item.stage)}</p>
-            </a>
-          ))}
+      )}
+
+      {/* Střed - obsah přednášky */}
+      <div class="detail-content">
+        <div class="detail-header">
+          <h1>{getText(talk.title, lang)}</h1>
+          <p class="list-meta">{talk.yearId} · {formatStage(talk.stage)} · {talk.time}</p>
         </div>
+        {!isCurrentYear && (
+          <div class="video-container">
+            <div class="video-placeholder">
+              <div class="video-placeholder-content">
+                <div class="play-icon">▶</div>
+                <p>{getTranslation(lang, 'talks', 'videoComingSoon')} {talk.youtubeId}</p>
+              </div>
+            </div>
+          </div>
+        )}
+        <div class="detail-description">
+          <p>{getText(talk.description, lang)}</p>
+          <p>{getTranslation(lang, 'talks', 'descriptionExtra')}</p>
+        </div>
+        
+        {/* Témata */}
+        <div style="margin-top: 2rem; margin-bottom: 3rem;">
+          <p style="font-size: 16px; color: rgba(0, 0, 34, 0.8); margin-bottom: 1rem; font-weight: 500;">
+            {lang === 'cs' ? 'Témata:' : 'Topics:'}
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            {talk.topicIds.map((topicId) => {
+              const topic = frontKonData.topics.find((t) => t.id === topicId);
+              if (!topic) return null;
+              const topicName = getText(topic.name, lang);
+              
+              if (isCurrentYear) {
+                // Aktuální ročník - secondary button bez odkazu
+                return (
+                  <span class="btn-secondary" style="display: inline-block; cursor: default; pointer-events: none;">
+                    {topicName}
+                  </span>
+                );
+              } else {
+                // Archiv - secondary button s odkazem
+                return (
+                  <a class="btn-secondary" href={pref(`/${lang}/archiv/prednasky/?topic=${topicId}`)}>
+                    {topicName}
+                  </a>
+                );
+              }
+            })}
+          </div>
+        </div>
+
+        {/* Související přednášky */}
+        {related.length > 0 && (
+          <div class="related-section">
+            <h2>{getTranslation(lang, 'talks', 'relatedTalks')}</h2>
+            <div class="grid archive-talks-grid">
+              {related.map((item) => {
+                const itemSpeaker = frontKonData.speakers.find((s) => s.id === item.speakerId);
+                return (
+                  <TalkCard
+                    talk={item}
+                    speaker={itemSpeaker}
+                    topics={frontKonData.topics}
+                    lang={lang}
+                    base={base}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
-    )}
+    </div>
   </div>
+
+  <style>
+    .speaker-avatar-large {
+      border-radius: 0;
+      border: 1px solid rgba(0, 0, 34, 0.2);
+      overflow: hidden;
+      background: rgba(0, 0, 34, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+      .detail-page > div:first-child {
+        grid-template-columns: 1fr;
+      }
+      .detail-page > div:first-child > div:first-child {
+        position: static !important;
+      }
+    }
+  </style>
 </BaseLayout>
-
-
