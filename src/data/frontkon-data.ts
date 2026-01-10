@@ -14,7 +14,20 @@ export const frontKonData: FrontKonData = {
     { id: '2022', year: 2022, location: 'Praha', date: '1. října 2022', claim: l('Scale-up frontendu', 'Scaling up frontend') },
     { id: '2023', year: 2023, location: 'Praha', date: '7. října 2023', claim: l('Design systémy všude', 'Design systems everywhere') },
     { id: '2024', year: 2024, location: 'Praha, O2 Universum', date: '5. října 2024', claim: l('Frontend v produkci', 'Frontend in production') },
-    { id: '2025', year: 2025, location: 'Praha, O2 Universum', date: '4. října 2025', claim: l('AI a DX na maximum', 'AI and DX to the max') },
+    { 
+      id: '2025', 
+      year: 2025, 
+      location: 'Praha, O2 Universum', 
+      date: '4. října 2025', 
+      claim: l('AI a DX na maximum', 'AI and DX to the max'),
+      description: l('Více než 600 frontendistů a frontendistek v jeden den! Už čtvrtý ročník FrontKonu, tentokrát opět v Brně. Letos tě čeká několik nosných témat (AI ve vývoji, stav CSS), nejnovější trendy webového frontendu a přednášky do hloubky a od lidí se zkušenostmi.', 'More than 600 frontend developers in one day! The fourth edition of FrontKon, this time again in Brno. This year you can expect several key topics (AI in development, state of CSS), the latest web frontend trends and in-depth talks from experienced people.'),
+      participantsCount: 600,
+      mainVideoId: 'w7IUpDYMZgk',
+      photoGalleryUrl: 'https://example.com/photos/frontkon-2025',
+      youtubePlaylistId: 'PLexample2025',
+      highlightedSpeakerIds: ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25', 'sp-01'],
+      metaDescription: l('FrontKon 2025 - AI a DX na maximum. Více než 600 účastníků, přes 30 řečníků, 3 stage. Archiv přednášek, fotogalerie a záznamy.', 'FrontKon 2025 - AI and DX to the max. More than 600 participants, over 30 speakers, 3 stages. Archive of talks, photo gallery and recordings.'),
+    },
     { id: '2026', year: 2026, location: 'Praha, O2 Universum', date: '3. října 2026', claim: l('Tvoříme budoucnost UX', 'Shaping the future of UX') },
   ],
   topics: [
@@ -283,6 +296,18 @@ export const frontKonData: FrontKonData = {
       authorId: 'sp-02',
       date: '2025-07-02',
     },
+  ],
+  partners: [
+    // Partneři 2025 - ukázka
+    { id: 'p-2025-01', name: 'CDN77', url: 'https://www.cdn77.com/', type: 'main', yearId: '2025' },
+    { id: 'p-2025-02', name: 'Alma Career', url: 'https://magazin.almacareer.com/cz', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-03', name: 'GreenCode', url: 'https://greencode.cz/', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-04', name: 'Heureka Group', url: 'https://heureka.group/', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-05', name: 'Livesport', url: 'https://livesport.cz/', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-06', name: 'Make', url: 'https://make.com/', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-07', name: 'Mews', url: 'https://mews.com/', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-08', name: 'Outreach', url: 'https://outreach.io', type: 'partner', yearId: '2025' },
+    { id: 'p-2025-09', name: 'Superkoders', url: 'https://superkoders.com/', type: 'afterparty', yearId: '2025' },
   ],
 };
 

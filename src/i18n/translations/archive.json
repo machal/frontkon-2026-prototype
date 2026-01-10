@@ -41,6 +41,49 @@
       "pageTitle": "Spíkři v archivu",
       "pageSubtitle": "Spíkři 2020–2026",
       "pageDescription": "Filtrovat podle jména, firmy a roku výskytu."
+    },
+    "yearPage": {
+      "stats": {
+        "talks": "přednášek",
+        "speakers": "řečníků",
+        "workshops": "workshopů",
+        "participants": "účastníků",
+        "topics": "témat"
+      },
+      "memories": {
+        "title": "Vzpomínky na FrontKon",
+        "subtitle": "Podívej se na konferenci očima fotografa nebo rovnou nasaj atmosféru z videa.",
+        "watchVideos": "Sledovat videa",
+        "viewGallery": "Zobrazit fotogalerii"
+      },
+      "program": {
+        "title": "Program konference",
+        "subtitle": "3 stage nabité do jednoho dne. Prozkoumej svá oblíbená témata nebo zabrouzdejte do nových vod.",
+        "stage": "Stage"
+      },
+      "speakers": {
+        "title": "Řečníci",
+        "subtitle": "Přes 30 skvělých řečníků s různými tématy",
+        "allSpeakers": "Všichni řečníci"
+      },
+      "workshops": {
+        "title": "Workshopy",
+        "subtitle": "Hlubší ponor do témat s praktickými cvičeními"
+      },
+      "partners": {
+        "title": "Partneři konference",
+        "subtitle": "Naši partneři jsou srdcem komunity. Díky jejich podpoře můžeme zajistit potřebné zázemí a vytvářet nové příležitosti pro všechny.",
+        "mainPartner": "Hlavní partner",
+        "partner": "Partner",
+        "afterpartyPartner": "Partner afterparty"
+      },
+      "navigation": {
+        "title": "Procházení archivu",
+        "subtitle": "Prozkoumej archiv podle kategorie",
+        "talks": "Všechny přednášky",
+        "topics": "Všechna témata",
+        "speakers": "Všichni řečníci"
+      }
     }
   },
   "en": {
@@ -85,6 +128,49 @@
       "pageTitle": "Speakers in archive",
       "pageSubtitle": "Speakers 2020–2026",
       "pageDescription": "Filter by name, company and year of appearance."
+    },
+    "yearPage": {
+      "stats": {
+        "talks": "talks",
+        "speakers": "speakers",
+        "workshops": "workshops",
+        "participants": "participants",
+        "topics": "topics"
+      },
+      "memories": {
+        "title": "Memories from FrontKon",
+        "subtitle": "See the conference through the photographer's eyes or soak up the atmosphere from the video.",
+        "watchVideos": "Watch videos",
+        "viewGallery": "View photo gallery"
+      },
+      "program": {
+        "title": "Conference program",
+        "subtitle": "3 stages packed into one day. Explore your favorite topics or dive into new waters.",
+        "stage": "Stage"
+      },
+      "speakers": {
+        "title": "Speakers",
+        "subtitle": "Over 30 great speakers with various topics",
+        "allSpeakers": "All speakers"
+      },
+      "workshops": {
+        "title": "Workshops",
+        "subtitle": "Deeper dive into topics with practical exercises"
+      },
+      "partners": {
+        "title": "Conference partners",
+        "subtitle": "Our partners are the heart of the community. Thanks to their support, we can provide the necessary facilities and create new opportunities for everyone.",
+        "mainPartner": "Main partner",
+        "partner": "Partner",
+        "afterpartyPartner": "Afterparty partner"
+      },
+      "navigation": {
+        "title": "Browse archive",
+        "subtitle": "Explore archive by category",
+        "talks": "All talks",
+        "topics": "All topics",
+        "speakers": "All speakers"
+      }
     }
   }
 }

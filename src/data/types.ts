@@ -55,6 +55,13 @@ export interface Year {
   location: string;
   date: string;
   claim: LocalizedText;
+  description?: LocalizedText;
+  participantsCount?: number;
+  mainVideoId?: string; // YouTube ID pro embed
+  photoGalleryUrl?: string;
+  youtubePlaylistId?: string;
+  highlightedSpeakerIds?: string[]; // 6 hlavních řečníků
+  metaDescription?: LocalizedText;
 }
 
 export interface Topic {
@@ -71,6 +78,15 @@ export interface BlogPost {
   date: string;
 }
 
+export interface Partner {
+  id: string;
+  name: string;
+  url: string;
+  type: 'main' | 'partner' | 'afterparty';
+  yearId: string;
+  logoUrl?: string;
+}
+
 export interface FrontKonData {
   years: Year[];
   speakers: Speaker[];
@@ -78,5 +94,6 @@ export interface FrontKonData {
   talks: Talk[];
   workshops: Workshop[];
   blogPosts: BlogPost[];
+  partners: Partner[];
 }
 

@@ -68,7 +68,7 @@ const archiveYears = frontKonData.years.filter((y) => {
     </div>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
       {archiveYears.map((year) => (
-        <a class="card card-link" href={pref(`/${lang}/archiv/prednasky/?year=${year.id}`)}>
+        <a class="card card-link" href={pref(`/${lang}/archiv/${year.id}/`)}>
           <h3>FrontKon {year.year}</h3>
           <p class="modal-description">{getText(year.claim, lang)}</p>
           <p class="list-meta">{year.date} · {year.location}</p>
