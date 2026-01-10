@@ -87,6 +87,17 @@ export interface Partner {
   logoUrl?: string;
 }
 
+export interface Photo {
+  id: string;
+  url: string; // URL obrázku z CMS
+  thumbnailUrl?: string; // volitelné, pro malé náhledy
+  alt: LocalizedText; // popisek pro přístupnost
+  yearId: string; // povinné - každá fotka patří k ročníku
+  speakerId?: string; // volitelné - může být přiřazena k řečníkovi
+  talkId?: string; // volitelné - může být přiřazena k přednášce
+  order?: number; // pořadí v galerii
+}
+
 export interface FrontKonData {
   years: Year[];
   speakers: Speaker[];
@@ -95,5 +106,6 @@ export interface FrontKonData {
   workshops: Workshop[];
   blogPosts: BlogPost[];
   partners: Partner[];
+  photos: Photo[];
 }
 

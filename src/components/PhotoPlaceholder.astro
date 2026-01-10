@@ -1,0 +1,32 @@
+---
+type Props = {
+  aspectRatio?: string; // např. "16/9", "4/3", "1/1", "3/2"
+  label?: string;
+};
+
+const { aspectRatio = "4/3", label = "Foto" } = Astro.props;
+---
+
+<div 
+  class="photo-placeholder" 
+  style={`aspect-ratio: ${aspectRatio};`}
+>
+  <p class="photo-placeholder-text">{label}</p>
+</div>
+
+<style>
+  .photo-placeholder {
+    width: 100%;
+    background: rgba(0, 0, 34, 0.1);
+    border: 1px solid rgba(0, 0, 34, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-placeholder-text {
+    color: rgba(0, 0, 34, 0.5);
+    font-size: 14px;
+    font-family: 'League Spartan', sans-serif;
+  }
+</style>

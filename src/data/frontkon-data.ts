@@ -309,5 +309,126 @@ export const frontKonData: FrontKonData = {
     { id: 'p-2025-08', name: 'Outreach', url: 'https://outreach.io', type: 'partner', yearId: '2025' },
     { id: 'p-2025-09', name: 'Superkoders', url: 'https://superkoders.com/', type: 'afterparty', yearId: '2025' },
   ],
+  photos: [
+    // Fotky z přednášek 2025
+    { 
+      id: 'photo-2025-01', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+1',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+1',
+      alt: l('Řečník během přednášky', 'Speaker during talk'),
+      yearId: '2025',
+      speakerId: 'sp-21',
+      talkId: 't-2025-01',
+      order: 1
+    },
+    { 
+      id: 'photo-2025-02', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+2',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+2',
+      alt: l('Přednáška na stage A', 'Talk on stage A'),
+      yearId: '2025',
+      speakerId: 'sp-22',
+      talkId: 't-2025-02',
+      order: 1
+    },
+    { 
+      id: 'photo-2025-03', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+3',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+3',
+      alt: l('Řečník během prezentace', 'Speaker during presentation'),
+      yearId: '2025',
+      speakerId: 'sp-23',
+      talkId: 't-2025-03',
+      order: 1
+    },
+    { 
+      id: 'photo-2025-04', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+4',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+4',
+      alt: l('Přednáška na stage B', 'Talk on stage B'),
+      yearId: '2025',
+      speakerId: 'sp-24',
+      talkId: 't-2025-04',
+      order: 1
+    },
+    { 
+      id: 'photo-2025-05', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+5',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+5',
+      alt: l('Řečník během přednášky', 'Speaker during talk'),
+      yearId: '2025',
+      speakerId: 'sp-25',
+      talkId: 't-2025-05',
+      order: 1
+    },
+    // Obecné fotky z akce 2025
+    { 
+      id: 'photo-2025-06', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+6',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+6',
+      alt: l('Atmosféra na konferenci', 'Conference atmosphere'),
+      yearId: '2025',
+      order: 1
+    },
+    { 
+      id: 'photo-2025-07', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+7',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+7',
+      alt: l('Networking během přestávky', 'Networking during break'),
+      yearId: '2025',
+      order: 2
+    },
+    { 
+      id: 'photo-2025-08', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+8',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+8',
+      alt: l('Účastníci konference', 'Conference participants'),
+      yearId: '2025',
+      order: 3
+    },
+    // Fotky z přednášek 2024
+    { 
+      id: 'photo-2024-01', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+2024-1',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+2024-1',
+      alt: l('Přednáška z roku 2024', 'Talk from 2024'),
+      yearId: '2024',
+      speakerId: 'sp-01',
+      talkId: 't-2024-01',
+      order: 1
+    },
+    { 
+      id: 'photo-2024-02', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+2024-2',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+2024-2',
+      alt: l('Řečník během přednášky 2024', 'Speaker during talk 2024'),
+      yearId: '2024',
+      speakerId: 'sp-02',
+      talkId: 't-2024-02',
+      order: 1
+    },
+    // Fotky z přednášek 2023
+    { 
+      id: 'photo-2023-01', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+2023-1',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+2023-1',
+      alt: l('Přednáška z roku 2023', 'Talk from 2023'),
+      yearId: '2023',
+      speakerId: 'sp-01',
+      talkId: 't-2023-01',
+      order: 1
+    },
+    // Více fotek pro jednoho řečníka napříč ročníky
+    { 
+      id: 'photo-2023-02', 
+      url: 'https://placehold.co/1200x800/eeeeee/111111?text=Photo+2023-2',
+      thumbnailUrl: 'https://placehold.co/400x300/eeeeee/111111?text=Photo+2023-2',
+      alt: l('Další fotka z přednášky', 'Another photo from talk'),
+      yearId: '2023',
+      speakerId: 'sp-01',
+      talkId: 't-2023-01',
+      order: 2
+    },
+  ],
 };
 

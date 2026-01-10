@@ -5,6 +5,8 @@ import type { Locale } from '@/data/types';
 import { getText, mapTopics } from '@/utils/content';
 import { getTranslation, getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
+import PhotoGallery from '@/components/PhotoGallery.astro';
+import PhotoGalleryManager from '@/react/PhotoGalleryManager';
 
 export function getStaticPaths() {
   const paths: Array<{ params: { lang: string; year: string } }> = [];
@@ -80,6 +82,16 @@ const stats = {
   participants: year.participantsCount || 0,
   topics: [...new Set(talks.flatMap((t) => t.topicIds))].length,
 };
+
+// Fotky pro tento ročník
+const allYearPhotos = frontKonData.photos.filter(p => p.yearId === year.id);
+// Rozdělit fotky na kategorie
+const talkPhotos = allYearPhotos.filter(
+  p => p.talkId || p.speakerId
+);
+const otherPhotos = allYearPhotos.filter(
+  p => !p.talkId && !p.speakerId
+);
 
 // Program - stejná struktura jako v /prednasky/
 const timeSlots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
@@ -176,14 +188,33 @@ const prednaskyT = getTranslationObject(lang, 'prednasky');
           </div>
         </div>
       )}
-      {year.photoGalleryUrl && (
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-          <!-- Placeholder pro fotky - šedivé boxy -->
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div class="card" style="aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; padding: 0;">
-              <p style="color: rgba(0, 0, 34, 0.5); font-size: 14px;">Foto {i}</p>
-            </div>
-          ))}
+      {/* Fotky z přednášek */}
+      {talkPhotos.length > 0 && (
+        <div style="margin-bottom: 3rem;">
+          <h3 style="font-size: 24px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 1.5rem;">
+            {lang === 'cs' ? 'Fotky z přednášek' : 'Photos from talks'}
+          </h3>
+          <PhotoGallery 
+            photos={talkPhotos} 
+            lang={lang} 
+            galleryId={`year-${year.id}-talks`} 
+            showPlaceholders={true} 
+          />
+        </div>
+      )}
+
+      {/* Ostatní fotky */}
+      {otherPhotos.length > 0 && (
+        <div style="margin-bottom: 2rem;">
+          <h3 style="font-size: 24px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 1.5rem;">
+            {lang === 'cs' ? 'Ostatní fotky' : 'Other photos'}
+          </h3>
+          <PhotoGallery 
+            photos={otherPhotos} 
+            lang={lang} 
+            galleryId={`year-${year.id}-other`} 
+            showPlaceholders={true} 
+          />
         </div>
       )}
       <div class="cta-row" style="justify-content: center; margin-top: 2rem;">
@@ -382,6 +413,19 @@ const prednaskyT = getTranslationObject(lang, 'prednasky');
       </a>
     </div>
   </section>
+
+  <!-- React komponenta pro lightbox napříč všemi fotkami -->
+  {allYearPhotos.length > 0 && (
+    <PhotoGalleryManager 
+      client:load 
+      allPhotos={allYearPhotos.map(p => ({
+        id: p.id,
+        url: p.url,
+        thumbnailUrl: p.thumbnailUrl,
+        alt: getText(p.alt, lang)
+      }))} 
+    />
+  )}
 </BaseLayout>
 
 <style>

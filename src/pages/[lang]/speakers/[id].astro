@@ -7,6 +7,8 @@ import { formatStage } from '@/utils/format';
 import { getTranslation, getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
 import TalkCard from '@/components/TalkCard.astro';
+import PhotoGallery from '@/components/PhotoGallery.astro';
+import PhotoGalleryManager from '@/react/PhotoGalleryManager';
 
 const { lang: langParam, id } = Astro.params;
 const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
@@ -43,6 +45,15 @@ const currentYearSpeakers = ['sp-21', 'sp-22', 'sp-23', 'sp-24', 'sp-25'];
 const isCurrentYearSpeaker = currentYearSpeakers.includes(speaker.id);
 const currentTalk = isCurrentYearSpeaker ? talks.find((t) => t.yearId === currentYear) : null;
 const pastTalks = talks.filter((t) => t.yearId !== currentYear);
+
+// Fotky řečníka napříč ročníky
+const speakerPhotos = frontKonData.photos.filter(p => p.speakerId === speaker.id);
+// Seskupit podle ročníku
+const photosByYear = speakerPhotos.reduce((acc, photo) => {
+  if (!acc[photo.yearId]) acc[photo.yearId] = [];
+  acc[photo.yearId].push(photo);
+  return acc;
+}, {} as Record<string, typeof speakerPhotos>);
 
 // Rozšířit bio na minimálně 500 znaků (pro demo účely, v produkci by mělo být v datech)
 const bioText = getText(speaker.bio, lang);
@@ -166,9 +177,47 @@ const t = getTranslationObject(lang, 'speakers');
             </div>
           </div>
         )}
+
+        {/* Sekce s fotkami */}
+        {speakerPhotos.length > 0 && (
+          <div class="related-section">
+            <h2 style="font-size: 36px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 2rem;">
+              {t.photos}
+            </h2>
+            {Object.entries(photosByYear).map(([yearId, photos]) => {
+              const year = frontKonData.years.find(y => y.id === yearId);
+              return (
+                <div style="margin-bottom: 3rem;">
+                  <h3 style="font-size: 24px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 1.5rem;">
+                    FrontKon {year?.year || yearId}
+                  </h3>
+                  <PhotoGallery 
+                    photos={photos} 
+                    lang={lang} 
+                    galleryId={`speaker-${speaker.id}`}
+                    showPlaceholders={true}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   </div>
+
+  <!-- React komponenta pro lightbox napříč všemi fotkami řečníka -->
+  {speakerPhotos.length > 0 && (
+    <PhotoGalleryManager 
+      client:load 
+      allPhotos={speakerPhotos.map(p => ({
+        id: p.id,
+        url: p.url,
+        thumbnailUrl: p.thumbnailUrl,
+        alt: getText(p.alt, lang)
+      }))} 
+    />
+  )}
 
   <style>
     .speaker-avatar-large {

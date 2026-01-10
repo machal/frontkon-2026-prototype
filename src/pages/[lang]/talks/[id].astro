@@ -7,6 +7,8 @@ import { formatStage } from '@/utils/format';
 import { getTranslation, getTranslationObject } from '@/utils/i18n';
 import { languages, defaultLanguage } from '@/i18n/config';
 import TalkCard from '@/components/TalkCard.astro';
+import PhotoGallery from '@/components/PhotoGallery.astro';
+import PhotoGalleryManager from '@/react/PhotoGalleryManager';
 
 const { lang: langParam, id } = Astro.params;
 const lang: Locale = (langParam && languages.includes(langParam as Locale)) 
@@ -20,6 +22,9 @@ if (!langParam || !languages.includes(langParam as Locale)) {
 const talk = frontKonData.talks.find((t) => t.id === id);
 const base = import.meta.env.BASE_URL || '/';
 const pref = (path: string) => `${base.replace(/\/$/, '')}${path}`;
+
+// Fotky pro tuto přednášku
+const talkPhotos = frontKonData.photos.filter(p => p.talkId === talk?.id);
 
 export function getStaticPaths() {
   const paths: Array<{ params: { lang: string; id: string } }> = [];
@@ -137,6 +142,21 @@ const t = getTranslationObject(lang, 'talks');
           </div>
         </div>
 
+        {/* Fotky z přednášky */}
+        {talkPhotos.length > 0 && (
+          <div style="margin-top: 3rem; margin-bottom: 3rem;">
+            <h2 style="font-size: 36px; font-weight: 600; color: rgb(0, 0, 34); margin-bottom: 1.5rem;">
+              {getTranslation(lang, 'talks', 'photos')}
+            </h2>
+            <PhotoGallery 
+              photos={talkPhotos} 
+              lang={lang} 
+              galleryId={`talk-${talk.id}`}
+              showPlaceholders={true}
+            />
+          </div>
+        )}
+
         {/* Související přednášky */}
         {related.length > 0 && (
           <div class="related-section">
@@ -160,6 +180,19 @@ const t = getTranslationObject(lang, 'talks');
       </div>
     </div>
   </div>
+
+  <!-- React komponenta pro lightbox napříč všemi fotkami přednášky -->
+  {talkPhotos.length > 0 && (
+    <PhotoGalleryManager 
+      client:load 
+      allPhotos={talkPhotos.map(p => ({
+        id: p.id,
+        url: p.url,
+        thumbnailUrl: p.thumbnailUrl,
+        alt: getText(p.alt, lang)
+      }))} 
+    />
+  )}
 
   <style>
     .speaker-avatar-large {

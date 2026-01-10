@@ -54,7 +54,9 @@
         "title": "Vzpomínky na FrontKon",
         "subtitle": "Podívej se na konferenci očima fotografa nebo rovnou nasaj atmosféru z videa.",
         "watchVideos": "Sledovat videa",
-        "viewGallery": "Zobrazit fotogalerii"
+        "viewGallery": "Zobrazit fotogalerii",
+        "talkPhotos": "Fotky z přednášek",
+        "otherPhotos": "Ostatní fotky"
       },
       "program": {
         "title": "Program konference",
@@ -141,7 +143,9 @@
         "title": "Memories from FrontKon",
         "subtitle": "See the conference through the photographer's eyes or soak up the atmosphere from the video.",
         "watchVideos": "Watch videos",
-        "viewGallery": "View photo gallery"
+        "viewGallery": "View photo gallery",
+        "talkPhotos": "Photos from talks",
+        "otherPhotos": "Other photos"
       },
       "program": {
         "title": "Conference program",

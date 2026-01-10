@@ -1,0 +1,51 @@
+---
+import type { Photo, Locale } from '@/data/types';
+import { getText } from '@/utils/content';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
+
+type Props = {
+  photos: Photo[];
+  lang: Locale;
+  galleryId?: string; // unikátní ID pro tuto galerii (pro lightbox napříč všemi)
+  showPlaceholders?: boolean;
+};
+
+const { photos, lang, galleryId = 'default', showPlaceholders = false } = Astro.props;
+
+// Seřadit podle order, pokud je definován
+const sortedPhotos = [...photos].sort((a, b) => (a.order || 0) - (b.order || 0));
+
+// Generovat různé aspect ratio pro placeholdery
+const aspectRatios = ['16/9', '4/3', '1/1', '3/2', '16/10'];
+---
+
+<div class="photo-gallery" data-gallery-id={galleryId}>
+  <div class="photo-gallery-grid">
+    {sortedPhotos.map((photo, index) => {
+      const aspectRatio = aspectRatios[index % aspectRatios.length];
+      return (
+        <div 
+          class="photo-gallery-item" 
+          data-photo-id={photo.id}
+          role="button"
+          tabindex="0"
+          aria-label={getText(photo.alt, lang)}
+        >
+          {showPlaceholders ? (
+            <PhotoPlaceholder 
+              aspectRatio={aspectRatio}
+              label={`Foto ${index + 1}`}
+            />
+          ) : (
+            <img 
+              src={photo.thumbnailUrl || photo.url} 
+              alt={getText(photo.alt, lang)}
+              loading="lazy"
+              class="photo-gallery-thumbnail"
+            />
+          )}
+        </div>
+      );
+    })}
+  </div>
+</div>
